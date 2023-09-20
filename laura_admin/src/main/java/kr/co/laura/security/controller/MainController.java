@@ -28,7 +28,7 @@ public class MainController {
 	
 	
 	@GetMapping("/dashboard")
-	public String fdashboard(Model model) {
+	public String dashboard(Model model) {
 		
 		//대쉬보드 1. 오늘의 방문자 수 (비회원 포함 세션 ㄴㄴ) 
 		Optional<Visit> todayCount =  visitService.todayCount();

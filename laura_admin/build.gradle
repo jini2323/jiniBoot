@@ -2,7 +2,6 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.3'
 	id 'io.spring.dependency-management' version '1.1.3'
-	//id "com.ewerk.gradle.plugins.querydsl" version "1.0.10" // Querydsl  부트 3부터 ㄴㄴㄴ 이 닝기미 시발새끼 
 }
 
 
@@ -29,13 +28,7 @@ repositories {
 }
 
 dependencies {
-	//jsp 엔진을 사용시 
-	//implementation 'javax.servlet:jstl'
-	//implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
-	
-	// logback
-	//implementation 'org.slf4j:slf4j-api:1.7.32'
-   // implementation 'ch.qos.logback:logback-classic:1.2.6'
+
 	
 	//타임리프
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -59,43 +52,25 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 	
-	//hibernate
-	//implementation 'org.hibernate:hibernate-entitymanager'
-	//implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.1.Final'
-	
-	//마이바티스 
-	//implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
-	//testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2'
 		
 	// querydsl 
 	//  QueryDSL 을 사용하기 위한 라이브러리
 	implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
-	//implementation "com.querydsl:querydsl-collections"
 	//QClass 를 생성하기 위한 라이브러리
 	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-	//annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-	// java.lang.NoClassDefFoundError:javax/persistence/Entity 오류 대응을 위해 아래 2개가 필요 
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 	
 	//JDBC
-	//implementation 'com.oracle.database.jdbc', name: 'ojdbc6', version: '11.2.0.4'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc' //starter-data-jpa'이게 있어서, jpa라이브러리에 이미 jdbc라이브러리가 포함되어있다.
 	
 	
 	//오라클
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc6:11.2.0.4'
-	//compile 'com.oracle:ojdbc6:11.2.0.4'
-	//implementation group: 'com.oracle.database.jdbc', name: 'ojdbc6', version: '11.2.0.4'
 	
 	
 	//스프링  JPA
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //여기에 jdbc 라이브러리 포함? 
-	
-	
-	//h2
-	//implementation 'com.h2database:h2:2.2.222'
-	//runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' 
 	
 	//lombok
 	compileOnly 'org.projectlombok:lombok'
@@ -125,8 +100,6 @@ configurations {
 	querydsl.extendsFrom compileClasspath
 }
 
-//이 코드를 통해 위에서 선언한 querydslSrcDir 변수의 src/main/generated 에다가 
-//annotation processors 가 만든 QClass 들을 저장해준다.
 
 tasks.withType(JavaCompile) {
 	options.generatedSourceOutputDirectory = file(querydslDir)
@@ -138,13 +111,6 @@ clean.doLast {
 }
 
 
-
-//clean {
-//    delete file(querydslSrcDir)
-//}
-//tasks.withType(JavaCompile) {
-//    options.generatedSourceOutputDirectory = file(querydslSrcDir)
-//}
 
 
 

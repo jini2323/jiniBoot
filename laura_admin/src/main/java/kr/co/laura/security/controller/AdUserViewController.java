@@ -44,7 +44,7 @@ public class AdUserViewController {
 	
 	@RequestMapping(value = { "/", "/adMain" }, method = RequestMethod.GET)
 	public String adminIndex(Model model) {
-		model.addAttribute("msg","여기는 관리자 페이지 Main 입니다.");
+		model.addAttribute("msg","여기는 관리자 임시 페이지 입니다.");
 		return "admin/adindex";
 	}
 	

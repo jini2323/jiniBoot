@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @Service
 public class AdUserDetailsService implements UserDetailsService {
-	//이 클래스가 인증매니저? 
 
 	@Autowired
 	private final AdUserService adUserservice;

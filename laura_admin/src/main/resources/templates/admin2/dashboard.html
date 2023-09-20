@@ -44,8 +44,9 @@
 								</div>
 								<hr class="dark horizontal my-0">
 								<div class="card-footer p-3">
-									<p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3%
-										</span>than last month</p>
+									
+									<p class="mb-0">Total <span class="text-success text-sm font-weight-bolder" th:text="${todayCount.get().countNum}">
+											</span> 명</p>
 								</div>
 							</div>
 						</div>
@@ -58,13 +59,6 @@
 										<i class="material-icons opacity-10">person</i>
 									</div>
 
-									<!--[ 대 괄호로 덮으면 변수값이다-->
-									<!--	<div class="text-end pt-1">
-										<p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
-										<h4 class="mb-0" th:if="${newTodayMems.isPresent()}"
-											th:text="${newTodayMems}"></h4>
-										<h4 class="mb-0" th:unless="${newTodayMems.isPresent()}">0</h4>
-									</div>-->
 									<div class="text-end pt-1">
 										<p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
 										<h4 class="mb-0" th:if="${todayNewMems.isPresent()}"
@@ -75,8 +69,8 @@
 								</div>
 								<hr class="dark horizontal my-0">
 								<div class="card-footer p-3">
-									<p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than
-										yesterday</p>
+									<p class="mb-0">Total 회원 수<span class="text-danger text-sm font-weight-bolder" th:text="${todayNewMems.get().totalMem}">
+										</span> 명</p>
 								</div>
 							</div>
 						</div>

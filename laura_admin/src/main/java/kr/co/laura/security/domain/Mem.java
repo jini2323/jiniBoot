@@ -100,9 +100,9 @@ public class Mem {
 
 	
 	//, columnDefinition = "default 'UNVERIFIED' "
-	@Enumerated(EnumType.STRING)
-	@Column(name = "ROLE_TYPE", nullable = false)
-	private RoleType roleType;
+	//@Enumerated(EnumType.STRING)
+	//@Column(name = "ROLE_TYPE", nullable = false)
+	//private RoleType roleType;
 	
 	
 	
@@ -115,7 +115,7 @@ public class Mem {
 	Date mdate, String grade,
 	String arstatus, String addr,
 	String bankaccount, String arprofilepic, String arprofile,
-	Date ardate, Long point, RoleType roleType)
+	Date ardate, Long point ) //RoleType roleType
 	{
   
   this.num = num; 
@@ -136,10 +136,10 @@ public class Mem {
   this.arprofile = arprofile; 
   this.ardate =ardate; 
   this.point = (long) 300;
-  this.roleType = RoleType.UNVERIFIED;
+  //this.roleType = RoleType.UNVERIFIED;
   
   System.out.println("builder로 일반회원 생성!"); System.out.println(num); //여기서null이 뜬다. 
-  System.out.println("생성된 회원의 권한:"+roleType); 
+ // System.out.println("생성된 회원의 권한:"+roleType); 
   
  }
 	

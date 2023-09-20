@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+	
+
+<div class="wrap" layout:fragment="content">
+	가입 성공시
+	<h3 th:text=" 'Welcome to ' + ${msg}"></h3>
+	
+		가입 실패시 
+	<h3 th:text=" 'Error: 가입에러 ' + ${msge}"></h3>
+</div>
+
+
+

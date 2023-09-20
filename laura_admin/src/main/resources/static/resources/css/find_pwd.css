@@ -1,0 +1,14 @@
+@charset "EUC-KR";
+.container .pwd-text {}
+.container .pwd-text h2{color: black; text-align: center; font-weight: bold;}
+.container .pwd-text h6{color: black; text-align: center;}
+.container .find-pwd{background-color:#f8f8f8; padding: 50px 50px; margin: 50px 50px; border-top: 2px solid;}
+.container .find-pwd .find-pwd-method1{text-align: center; margin-bottom: 50px;}
+.container .find-pwd .find-pwd-method1 h5{font-weight: bold;}
+.container .find-pwd .find-pwd-method1 .find-pwd-box{display: grid; width:35%; margin: 0 290px;}
+.container .find-pwd .find-pwd-method1 .find-pwd-box .box{margin: 5px 10px;}
+.container .find-pwd .find-pwd-method1 .find-pwd-box .button{width: 93%; margin-left: 10px; margin-top: 5px;}
+.container .find-pwd .find-pwd-method2{text-align: center;}
+.container .find-pwd .find-pwd-method2 h5{font-weight: bold;}
+.container .find-pwd .find-pwd-method2 .find-pwd-box{display: grid; width:35%; margin-left: 300px;}
+.material-symbols-outlined {font-variation-settings: FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48}

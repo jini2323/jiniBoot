@@ -1,0 +1,41 @@
+	.join {display: flex; justify-content: center;}
+	.join .title {margin-top: 50px; text-align: center;}
+	.join .title h2 {font-weight: bold; color:black;}
+	.join .join_btn {text-align: center; padding: 0 800px; margin-bottom: 20px; margin-top: 25px;}
+	.join .join_btn .speech-bubble img {width:10%;}
+	.join .join_btn .kakao-login {background-color: #F6E10A; border-radius: 10px; padding: 10px 10px; margin: 10px 0;}
+	.join .join_btn .kakao-login img {width:7%;}
+	.join .join_btn .naver_login {background-color: #1EC800;  border-radius: 10px; padding: 10px 10px; margin: 10px 0; color: white;}
+	.join .join_btn .naver_login img {width:7%;}
+	.join .join_btn .google_login {background-color: #D32F2F;  border-radius: 10px; padding: 10px 10px; margin: 10px 0; color: white;}
+	.join .join_btn .google_login img {width:7%;}
+	.join .join_btn .email_login {border:1.8px solid black; background-color: white; border-radius: 10px; padding: 10px 10px; margin: 10px 0;}
+	.join .login_click {text-align: center; margin-bottom: 135px; font-size: 7px;}
+	.join .login_click span:first-child {padding-right: 40px;}
+
+/*말풍선 css*/
+.speech-bubble {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid #d4d4d4;
+    border-radius: 30px;
+    width: 200px;
+    height: 40px;
+   	
+    font-size:13px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /*그림자 효과 설정 */
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: #d4d4d4 transparent transparent transparent;
+}
+/*말풍선 css 끝*/

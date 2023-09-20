@@ -1,0 +1,73 @@
+@charset "EUC-KR";
+
+.join-wrap {display: flex; justify-content: center; margin-bottom: 100px;}
+.join-wrap .join_in h2 {text-align: center; padding-right: 30px; font-weight: bold; margin-top: 80px; margin-bottom: 30px;}
+.join-wrap .join_in .basic-info {margin:70px auto;}
+.join-wrap .join_in .basic-info .join_email .input-box input {text-indent: 7px; border: 1px solid #a4a4a4; border-radius: 4px;}
+.join-wrap .join_in .basic-info .join_pw .input-box {display: grid; margin-bottom: 10px;}
+.join-wrap .join_in .basic-info .join_pw .input-box input:first-child {margin-bottom: 10px; text-indent: 7px; border: 1px solid #a4a4a4; border-radius: 4px;}
+.join-wrap .join_in .basic-info .join_pw .input-box input:nth-child(2) {text-indent: 7px; border: 1px solid #a4a4a4; border-radius: 4px;}
+.join-wrap .join_in .personal-info h5 {font-weight: bold;}
+.join-wrap .join_in .personal-info .join_name .input-box input {text-indent: 7px; border: 1px solid #a4a4a4; border-radius: 4px;}
+.join_name input {width: 300px; height: 40px;}
+.join_email input {width: 220px; height: 40px;}
+.group-img input {border: none; display: inline-block; width: 200px; justify-content: center;}
+.join_gender span {margin-right: 20px;}
+.join_birth input {width: 300px; height: 40px;}
+.join_nname input {width: 220px; height: 40px}
+.join_pw input {width: 300px; height: 40px;}
+.join_tel input {width: 220px; height: 40px}
+.submit input {width:310px; margin-top: 10px;}
+.to_join a {text-align: center;}	
+.material-symbols-outlined {font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48}
+.input-box input:focus {outline: 1px solid #99ffff;}
+
+.button {
+	width: 80px;
+	height: 40px;
+	font-family: 'Roboto', sans-serif;
+	font-size: small;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: bold;
+	color: white;
+	background-color: #a8e2ff;
+	border: none;
+	border-radius: 5px;
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+
+.button:hover {
+	background-color: #a8e2ff;
+	color: #fff;
+	
+}
+.button:focus{outline: 1px solid #fff;}
+
+.submit-button {
+	
+	height: 50px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #a8e2ff;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+	
+	}
+	
+.submit-button:hover{
+	background-color: #a8e2ff;
+	box-shadow: 0px 15px 20px rgba(135, 206, 235, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}

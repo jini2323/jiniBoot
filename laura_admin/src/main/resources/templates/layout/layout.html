@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="메인 페이지">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<!-- Title -->
+	<title>LAURA - 메인 페이지</title>
+
+	<!-- Favicon -->
+	<link rel="icon" href="static/resources/img/core-img/favicon.ico">
+
+	<!-- Style CSS -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+	<link rel="stylesheet" href="static/resources/css/style.css">
+	<link rel="stylesheet" href="static/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/resources/css/classy-nav.css">
+	<link rel="stylesheet" href="static/resources/css/animate.css">
+	<link rel="stylesheet" href="static/resources/css/owl.carousel.css">
+	<link rel="stylesheet" href="static/resources/css/font-awesome.min.css">
+	<link rel="stylesheet" href="static/resources/css/event_slide.css">
+	<link rel="stylesheet" href="static/resources/css/party.css">
+	<link rel="stylesheet" href="static/resources/css/trade.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+	<div th:replace="layout/header :: headerFragment">
+	</div>
+	<div layout:fragment="content"></div>
+	<footer th:replace="layout/footer :: footerFragment"></footer>
+
+	<!-- jQuery (Necessary for All JavaScript Plugins) -->
+	<script src="static/resources/js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Popper js -->
+	<script src="static/resources/js/popper.min.js"></script>
+	<!-- Bootstrap js -->
+	<script src="static/resources/js/bootstrap.min.js"></script>
+	<!-- Plugins js -->
+	<script src="static/resources/js/plugins.js"></script>
+	<!-- Active js -->
+	<script src="static/resources/js/active.js"></script>
+	<!-- Footer (채지우 수정 완료) -->
+</body>
+
+</html>

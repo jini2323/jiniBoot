@@ -1,0 +1,14 @@
+@charset "EUC-KR";
+.container .id-text {}
+.container .id-text h2{color: black; text-align: center; font-weight: bold;}
+.container .id-text h6{color: black; text-align: center;}
+.container .find-id{background-color:#f8f8f8; padding: 50px 50px; margin: 50px 50px; border-top: 2px solid;}
+.container .find-id .find-id-method1{text-align: center; margin-bottom: 100px;}
+.container .find-id .find-id-method1 h5{font-weight: bold;}
+.container .find-id .find-id-method1 .find-id-box{display: grid; width:35%; margin: 0 290px;}
+.container .find-id .find-id-method1 .find-id-box .box{margin: 5px 10px;}
+.container .find-id .find-id-method1 .find-id-box .button{width: 93%; margin-left: 10px; margin-top: 5px;}
+.container .find-id .find-id-method2{text-align: center;}
+.container .find-id .find-id-method2 h5{font-weight: bold;}
+.container .find-id .find-id-method2 .find-id-box{display: grid; width:35%; margin-left: 300px;}
+.material-symbols-outlined {font-variation-settings: FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48}

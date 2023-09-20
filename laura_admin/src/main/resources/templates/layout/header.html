@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Preloader -->
+<div th:fragment="headerFragment">
+	<div id="preloader">
+		<div class="preload-content">
+			<div id="original-load"></div>
+		</div>
+	</div>
+
+	<!-- ##### Header Area Start ##### -->
+	<header class="header-area">
+
+		<!-- Top Header Area -->
+		<div class="top-header">
+			<div class="container h-100">
+				<div class="row h-100 align-items-center">
+					<!-- Breaking News Area -->
+					<div class="col-12 col-sm-8">
+						<div class="breaking-news-area">
+							<div id="breakingNewsTicker" class="ticker">
+								<ul>
+									<li><a href="#">안녕하세요!</a></li>
+									<li><a href="#">크라우드 펀딩!</a></li>
+									<li><a href="#">배우 101!</a></li>
+									<li><a href="#">이벤트!</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- Top Login Bar -->
+					<!-- 로그인전  -->
+					<div class="col-12 col-sm-4" th:if="${session.sessionID == null}">
+						<div class="top_login">
+							<a href="adLogout" class="login">관리자 로그아웃</a>
+							<a>/</a>
+							<!--나중에 : king만 보이도록 수정-->
+							<a href="adJoinForm" class="join">관리자계정 생성</a>
+						</div>
+					</div>
+
+					<!-- 로그인 후  -->
+					<th:block th:if="${session.sessionID != null}">
+						<div class="col-12 col-sm-4">
+							<div class="top_login">
+								<a href="/mypage?email=${session.sessionID}" class="mypage" id="mypage">[[${session.sessionNNAME}]]님의 마이페이지</a>
+								<a>/</a>
+								<a href="adLogout" class="logout">로그아웃</a>
+							</div>
+						</div>
+					</th:block>
+
+				</div>
+			</div>
+		</div>
+		<!-- 박원빈 수정 완료 -->
+
+		<!-- 메인 로고 설정 -->
+		<!-- Logo Area -->
+		<div class="logo-area text-center">
+			<div class="container h-100">
+				<div class="row h-100 align-items-center">
+					<div class="col-12">
+						<!-- <a href="index.html" class="original-logo"><img src="img/core-img/logo.png" alt=""></a> -->
+						<!-- <a href="index.html" class="original-logo"><img src="img/core-img/LAURA.png" alt=""></a> -->
+						<a th:href="@{/adMain}" class="original-logo" style="font-size: 5.0rem;">LAURA</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Nav Area -->
+		<div class="original-nav-area" id="stickyNav">
+			<div class="classy-nav-container breakpoint-off">
+				<div class="container">
+					<!-- Classy Menu -->
+					<!-- <nav class="classy-navbar justify-content-between"> -->
+					<nav class="classy-navbar justify-content-end">
+						<!-- Subscribe 버튼 주석 처리 - 다른 것으로 사용 가능 -->
+						<!-- Subscribe btn
+                        <div class="subscribe-btn">
+                            <a href="#" class="btn subscribe-btn" data-toggle="modal" data-target="#subsModal">Subscribe</a>
+                        </div>
+                        -->
+						<!-- Navbar Toggler -->
+						<div class="classy-navbar-toggler">
+							<span class="navbarToggler"><span></span><span></span><span></span></span>
+						</div>
+
+						<!-- Menu -->
+						<div class="classy-menu" id="originalNav">
+							<!-- close btn -->
+							<div class="classycloseIcon">
+								<div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+							</div>
+
+							<!-- Nav Start -->
+							<div class="classynav">
+								<ul>
+									<!-- 홈 페이지 텍스트 및 링크 설정 -->
+									<li><a th:href="@{/adMain}">Home</a></li>
+									<!-- 크라우드 펀딩 텍스트 및 링크 설정 -->
+									<li><a href="memManage">회원관리</a>
+										<ul class="dropdown">
+											<li><a href="memManage">회원관리</a></li>
+											<li><a href="adJoinForm">관리자계정 생성</a></li>
+											<li><a href="adLogin">관리자 로그인</a></li>
+											<li><a href="adminInfo">어드민인포</a></li>
+										</ul>
+									</li>
+									<li><a href="adminInfo">관리자 인포</a>
+										<ul class="dropdown">
+											<li><a href="fmain_ing">현재 진행 중인 펀딩</a></li>
+											<li><a href="fmain_fin">종료된 펀딩</a></li>
+											<li><a href="fmain_soon">오픈 예정 펀딩</a></li>
+										</ul>
+
+									</li>
+									<li><a href="adMain2">템플릿 작업란</a>
+										<ul class="dropdown">
+											<li><a href="dashboard">dashboard</a></li>
+											<li><a href="billing">billing</a></li>
+											<li><a href="notifications">notifications</a></li>
+											<li><a href="profile">profile</a></li>
+											<li><a href="tables">tables</a></li>
+											<li><a href="adLoginForm">adLogin</a></li>
+											<li><a href="adJoinForm">adJoinForm</a></li>
+											<li><a href="eventMain">진행 중인 이벤트</a></li>
+										</ul>
+									</li>
+								</ul>
+
+								<!-- Search Form  -->
+								<div id="search-wrapper">
+									<form action="#">
+										<input type="text" id="search" placeholder="Search something...">
+										<div id="close-icon"></div>
+										<input class="d-none" type="submit" value="">
+									</form>
+								</div>
+							</div>
+							<!-- Nav End -->
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+</div>
+<!-- ##### Header Area End ##### -->

@@ -1,0 +1,24 @@
+@charset "EUC-KR";
+
+/*뉴스 리스트 아래 검색, 페이지네이션, 글작성 버튼 css영역(박원빈 수정)*/
+.n_uderbar{
+	height: 100%;
+}
+.n_search{
+	/* border:1px solid gray; */
+	float: left;
+	margin-left: 10px;
+}
+.n_pagenation{
+	width : 300px;
+	/* border:1px solid red; */
+	float: left;
+	margin-left: 10px;
+}
+.n_newbtn{
+	/* border:1px solid blue; */
+	float: left;
+	margin-left: 10px;
+	float: right;
+}
+/*뉴스 리스트 아래 검색, 페이지네이션, 글작성 버튼 css영역*/

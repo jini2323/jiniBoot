@@ -1,0 +1,36 @@
+@charset "EUC-KR";
+.ui-tab{margin-left: 38%;}
+.ui-tab .tab{text-align: center; display: flex;}
+.ui-tab .tab li{margin: 0 10px; margin-bottom:10px; font-weight: bold; font-size: 30px;}
+.ui-tab .tab li:hover{color:#54edfa;}
+.test-tbl .test-tbl-item:first-child {border-top: 1px solid #bcbcbc; border-bottom: 1px solid #bcbcbc;}
+.test-tbl .test-tbl-item {border-bottom: 1px solid #bcbcbc;}
+.test-tbl .test-tbl-item td{padding: 18px 0;}
+.test-tbl .test-tbl-item img{width: 55%; height:70px; border-radius: 6%;}
+.test-tbl tbody tr td:nth-child(2) {text-align: left;}
+.test-tbl .test-tbl-item .tbl-item-comments {background-color: #f5f6f8; padding: 22px 14px; border-radius: 6px; color:#979797;}
+.icon {display: flex; text-align: center;}
+/*.test-tbl .test-tbl-item span{padding-bottom: 10px;}*/
+.test-tbl .test-tbl-notice {border-bottom: 1px solid #bcbcbc;}
+.test-tbl .test-tbl-notice td{padding: 5px 20px; text-align: right;} 
+.test-tbl .test-tbl-notice:first-child {border-top: 1px solid #bcbcbc; border-bottom: 1px solid #bcbcbc;}
+.test-tbl .test-tbl-notice span{white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+/* ------------슬라이쇼-------------  */
+
+/*.sample-slider{width:50%;}
+.sample-slider img{width: 100%;}*/
+
+/* --------------아이콘------------------ */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.container .selectBox{text-align: left; margin-left: 10px; margin-bottom: 10px;}
+.container .selectBox select:nth-child(2) {width: 120px;}
+.container .selectBox select:nth-child(3) {width: 100px;}
+/*.test-tbl .test-tbl-item td{padding: 18px 30px; text-align: left;}*/

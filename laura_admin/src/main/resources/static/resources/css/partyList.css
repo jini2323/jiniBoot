@@ -1,0 +1,32 @@
+@charset "EUC-KR";
+.ui-tab{margin-left: 38%;}
+.ui-tab .tab{text-align: center; display: flex;}
+.ui-tab .tab li{margin: 0 10px; margin-bottom:10px; font-weight: bold; font-size: 30px; color: }
+.ui-tab .tab li:hover{color:#54edfa;}
+.test-tbl .test-tbl-item:first-child {border-top: 1px solid #bcbcbc; border-bottom: 1px solid #bcbcbc;}
+.test-tbl .test-tbl-item {border-bottom: 1px solid #bcbcbc;}
+.test-tbl .test-tbl-item td{padding: 18px 18px; text-align: right;} /*td: 전체*/
+.test-tbl .test-tbl-item td:first-child {text-align: left; padding-left: 13px;} /* 안녕하세요 ~ 이 부분  */
+.test-tbl .test-tbl-item td:nth-child()
+.test-tbl .test-tbl-item span{padding-bottom: 10px;}
+.test-tbl .test-tbl-item .tbl-item-comments {background-color: #f5f6f8; padding: 22px 14px; border-radius: 6px; color:#979797;}
+
+/* ------------슬라이쇼-------------  */
+ .sample-slider{
+        width:50%;
+    }
+    .sample-slider img{
+        width: 100%;
+    }
+/* 슬라이드쇼 컨테이너의 디자인 */
+
+.anno{
+	flex:1; 
+	margin-left: 20px; 
+	margin-right:100px; 
+	text-align: center;
+
+}
+/* 셀렉션 박스 */
+.bar{display: flex; margin:0 0 10px 10px;}	
+.bar .selectBox{width:80px;}

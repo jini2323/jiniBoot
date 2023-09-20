@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/7b2a602777.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../static/resources/css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+
+<div class="wrap" layout:fragment="content">
+	<div class="admin_join">
+		<!--action="adJoinSuccess"-->
+		<form method="post" id="adminjoin" autocomplete="on" action="adJoinProccess">
+				<div class="join_info">
+					<!--${#httpServletRequest.remoteAddr}-->
+					<input type="hidden" name="adreip" th:value="1323.23232.2223">
+
+					<div class="join_email">이메일 
+						<input type="email" name="adEmail" id="username" placeholder="Email">
+						<button type="button" class="btn btn-primary" id="emailChkBtn">중복체크</button>
+						<button type="button" class="btn btn-primary" id="emailChkBtn">중복체크/thyleaf</button>
+						<br> <span id="target"></span>
+					</div>
+					<div class="join_pw">비밀번호
+						<input type="password" name="adPwd" id="password" placeholder="8자이상 입력">
+						<input type="password" name="adPwd2" id="adPwd2" placeholder="비밀번호 확인">
+					</div>
+					<div class="join_deptno">부서번호
+						<input type="number" name="deptNo" id="deptNo" placeholder="번호만 입력">
+					</div>
+					<div class="join_tel">담당자 연락처
+						<input type="tel" name="adTel" id="adTel" placeholder="번호만 입력해주세요. - 제외">
+						<button type="button" class="btn btn-primary" id="telChkBtn">인증하기</button>
+						<br> <span id="target3"></span>
+					</div>
+					<div class="submit">
+						<input type="submit" value="관리자생성">
+					</div>
+					<div class="to_join">
+						<a href="adLogin">이미 가입하셨나요?</a>
+					</div>
+				</div>
+			</form>
+	</div>
+</div>

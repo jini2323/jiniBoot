@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.co.laura.security.domain.Visit;
+import kr.co.laura.security.service.FundingService;
 import kr.co.laura.security.service.MemberService;
 import kr.co.laura.security.service.VisitService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,9 @@ public class MainController {
 	
 	@Autowired
 	private final MemberService memService;
+	
+	@Autowired
+	private final FundingService funService;
 	
 	
 	
@@ -52,18 +56,24 @@ public class MainController {
 		Long totalMem = memService.totalMem();
 		model.addAttribute("totalMem",totalMem);
 		
+		
 		//대쉬보드 5 지난수 새 회원 수 
-		//List<Object[]> lastWeekNewMem = memService.lastWeekNewMem();
 		List<Long> lastWeekNewMem = memService.lastWeekNewMem();
 		model.addAttribute("lastWeekNewMem",lastWeekNewMem);
 		
 		for (Object e : lastWeekNewMem) {
+			System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
 		    System.out.println("일주일 전 새 회원수 for each 문 e : "+e);
-		    System.out.println("일주일 전 새 회원수 for each 문 크기 "+lastWeekNewMem.size());
-		    
 		}
 		
 		
+		//대쉬보드 6. 총 펀딩 게시글 수
+		Long totalFunding = funService.countTotalFunding();
+		model.addAttribute("totalFunding",totalFunding);
+		
+		//대쉬보드 7. 오늘 오픈(글작성 x 펀딩시작)한 펀딩 수
+		Long todayOpenfundings = funService.countTodayOpenFundings();
+		model.addAttribute("todayOpenfundings",todayOpenfundings);
 		
 		
 		return "admin2/dashboard";

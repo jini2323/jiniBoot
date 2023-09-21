@@ -22,6 +22,20 @@ public class FundingService {
 	}
 	
 	
+	//총 펀딩 게시글 수 구하기 
+	public Long countTotalFunding() {
+		Long totalFunding = funRepository.countBy();
+		return totalFunding;
+	}
+	
+	//오늘 오픈한(작성이 아닌) 시작하는 펀딩 수 
+	public Long countTodayOpenFundings() {
+		Long countTodayOpenFundings = funRepository.countTodayOpenFundings();
+		return countTodayOpenFundings;
+	}
+	
+	
+	
 	
 
 }

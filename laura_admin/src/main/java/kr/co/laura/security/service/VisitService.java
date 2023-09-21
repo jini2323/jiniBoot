@@ -1,8 +1,6 @@
 package kr.co.laura.security.service;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +8,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.laura.security.domain.Aduser;
 import kr.co.laura.security.domain.Visit;
 import kr.co.laura.security.repository.VisitRepository;
 import lombok.RequiredArgsConstructor;

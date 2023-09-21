@@ -35,6 +35,9 @@ public class FundingBoard {
 	@Column(name = "fupmemnum", nullable = false)
 	private Long fupmemnum; // 펀딩 업로드 회원 번호
 	
+	@Column(name = "funcategory", nullable = false)
+	private String funcategory; //영화 카테고리
+	
 	
 	@Column(name = "funtitle", nullable = false)
 	private String funtitle; //펀딩제목
@@ -69,6 +72,9 @@ public class FundingBoard {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fdate;  //펀딩 종료일
 	
+	@Column(name = "contentimg")
+	private String contentimg; //펀딩 내용 이미지
+	
 	@Column(name = "funvideo")
 	private String funvideo; // 펀딩 비디오파일
 	
@@ -83,7 +89,7 @@ public class FundingBoard {
 	@Lob
 	@Column(name = "funbudget")
 	private String funbudget; // 펀딩 예산안
-
+	
 	
 	@CreationTimestamp // insert시 현재시간을 저장
 	@Column(name = "fupdate", nullable = false)
@@ -94,15 +100,18 @@ public class FundingBoard {
 	
 	@Builder // 빌더패턴 : 불변의 객체를 생성 
 	public FundingBoard (
-			Long fupmemnum, String funtitle, String funwriter,
+			Long fupmemnum,String funcategory,
+			String funtitle, String funwriter,
 			String content, String funpreview, Long targetprice,
 			Long cost, String postimgn, Date sdate, Date fdate,
+			String contentimg,
 			String funvideo,  String actpic, String funpurpose,
 			String funbudget, Date fupdate
 			)
 	{
-		this.fupmemnum = funnum;
+		this.fupmemnum = fupmemnum;
 		this.funtitle = funtitle;
+		this.funcategory = funcategory;
 		this.funwriter = funwriter;
 		this.content = content;
 		this.funpreview = funpreview;
@@ -112,6 +121,7 @@ public class FundingBoard {
 		this.sdate = sdate;
 		this.fdate = fdate;
 		this.funvideo = funvideo;
+		this.contentimg = contentimg;
 		this.actpic = actpic;
 		this.funpurpose = funpurpose;
 		this.funbudget = funbudget;

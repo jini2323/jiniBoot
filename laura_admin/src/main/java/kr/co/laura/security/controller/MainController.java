@@ -28,7 +28,6 @@ public class MainController {
 	private final FundingService funService;
 	
 	
-	
 	@GetMapping("/dashboard")
 	public String dashboard(Model model) {
 		
@@ -80,8 +79,13 @@ public class MainController {
 		List<Long> lasgWeekNewFundings = funService.lastWeekNewFundings();
 		model.addAttribute("lasgWeekNewFundings",lasgWeekNewFundings);
 		
+		//대쉬보드 9 . 오늘 펀딩 참여 총 금액
+		Long totalTodayMoney = funService.todayTotalFunPati();
+		model.addAttribute("totalTodayMoney",totalTodayMoney);
 		
-		
+		//대쉬보드 10. 총 펀딩 참여 금액 
+		Long totalFunPatiMoney = funService.totalFunPati();
+		model.addAttribute("totalFunPatiMoney",totalFunPatiMoney);
 		
 		return "admin2/dashboard";
 	}

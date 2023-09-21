@@ -43,15 +43,6 @@ public class Aduser{ // UserDetails를 상속받아 인증 객체로 사용
 	private String adPwd; // --비번
 	
 	
-	//@ColumnDefault("ADMIN") 노쓸모
-	//@Column(name = "ROLE_TYPE", nullable = false)
-	//private String roleType;
-	
-	//public enum RoleType {
-	//	KING, ADMIN, VERIFIED,UNVERIFIED
-		//순서대로 딱 하나 있는 킹 관리자 계정, 관리자, 인증된 회원, 미인증 회원(일반, 디폴트)
-	//}
-	
 	@Enumerated(EnumType.STRING) //columnDefinition = "DEFAULT 'ADMIN'"
 	@Column(name = "ROLE_TYPE", nullable = false)
 	private RoleType roleType;
@@ -60,7 +51,6 @@ public class Aduser{ // UserDetails를 상속받아 인증 객체로 사용
 	public RoleType getRoleType() {
 	    return roleType;
 	}
-	
 	
 
 	@Builder // 빌더패턴 : 불변의 객체를 생성 , String roleAdmin
@@ -78,14 +68,6 @@ public class Aduser{ // UserDetails를 상속받아 인증 객체로 사용
 		System.out.println("생성된 관리자 권한: "+roleType); //ok
 	}
 
-	////이상 
-	/*
-	public static Aduser createUser(String adEmail, String adPwd, String adTel, int deptNo,
-			PasswordEncoder passwordEncoder) {
-
-		return new Aduser(deptNo, adTel, adEmail, passwordEncoder.encode(adPwd));
-	}
-	*/
 	
 	/*빌더 패턴으로 객체 생성시 필요가 없다
 	 * 

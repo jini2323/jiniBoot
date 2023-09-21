@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import kr.co.laura.security.domain.Mem;
-import kr.co.laura.security.domain.MemCount;
 import kr.co.laura.security.domain.Visit;
 import kr.co.laura.security.service.MemberService;
 import kr.co.laura.security.service.VisitService;
@@ -45,9 +43,19 @@ public class MainController {
 		
 		
 		//대쉬보드 3. 오늘 새 회원 수
-		Optional<MemCount> todayNewMems  = memService.showTodayNewMems();	
-		model.addAttribute("todayNewMems",todayNewMems);
-		System.out.println("메인컨트롤러 오늘 새 회원수 :"+todayNewMems);
+		Long todayNewMem = memService.todayNewMem();
+		model.addAttribute("todayNewMem",todayNewMem);
+		System.out.println("메인컨트롤러 오늘 새 회원수 :"+todayNewMem);
+		
+		
+		//대쉬보드 4. 총 회원수
+		Long totalMem = memService.totalMem();
+		model.addAttribute("totalMem",totalMem);
+		
+		
+		
+		
+		
 		
 		return "admin2/dashboard";
 	}

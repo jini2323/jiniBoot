@@ -59,19 +59,17 @@
 										<i class="material-icons opacity-10">person</i>
 									</div>
 								<!--투데이 가입자-->
-								
 									<!--<div class="text-end pt-1">
 										<p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
-										<h4 class="mb-0" th:if="${todayNewMem.isPresent()}"
-											th:text="${todayNewMems.get().todayCountMem}"></h4>
-										<h4 class="mb-0" th:unless="${todayNewMems.isPresent()}">0</h4>
-									</div>-->
-									<div class="text-end pt-1">
-										<p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
 										<h4 class="mb-0" th:text="${todayNewMem}">0</h4>
-									</div>
-									
+									</div>-->
 								<!--투데이 가입자-->
+								<div class="text-end pt-1">
+							    <p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
+							    <h4 class="mb-0" th:text="${todayNewMem != null ? todayNewMem : 0}">0</h4>
+								</div>
+														
+								
 								</div>
 								<hr class="dark horizontal my-0">
 								<div class="card-footer p-3">
@@ -136,14 +134,13 @@
 											<canvas id="chart-bars" class="chart-canvas" height="170">
 
 
-
 											</canvas>
 										</div>
 									</div>
 								</div>
 								<div class="card-body">
-									<h6 class="mb-0 ">저번주 방문자 수</h6>
-									<p class="text-sm ">주간 업데이트</p>
+									<h6 class="mb-0 ">Lastweek 방문자 수</h6>
+									<p class="text-sm ">(<span class="font-weight-bolder">주간 업데이트 </span>) </p>
 									<hr class="dark horizontal">
 									<div class="d-flex ">
 										<i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -165,15 +162,16 @@
 									</div>
 								</div>
 								<div class="card-body">
-									<h6 class="mb-0 "> Daily Sales </h6>
-									<p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in
-										today sales. </p>
+									<h6 class="mb-0 "> Lastweek 새 회원 수 </h6>
+									<p class="text-sm "> (<span class="font-weight-bolder">주간 업데이트 </span>) 
+										</p>
 									<hr class="dark horizontal">
 									<div class="d-flex ">
 										<i class="material-icons text-sm my-auto me-1">schedule</i>
-										<p class="mb-0 text-sm"> updated 4 min ago </p>
+										<p class="mb-0 text-sm"> 최종 업데이트 3일 전 </p>
 									</div>
 								</div>
+								
 							</div>
 						</div>
 
@@ -865,17 +863,38 @@
 	</script>
 
 
+<!--2번째 차트 영역--> 
+<script th:inline="javascript">
+	
+		// 오늘 새 회원 수/ 기본 값 0 설정
+		//var todayNewMem = /*[[ ${todayNewMem} ]]*/ 0;
 
+		// 저번주 새 회원 수
+		var lastWeekNewMem = /*[[ ${lastWeekNewMem} ]]*/ [];
+		
 
-	<script>
+		// 데이터를 풀어서 숫자 배열로 변환
+		//lastWeekNewMem = lastWeekNewMem.map(function (long) {
+		//	return long;
+		//});
 
+		initializeChart2(lastWeekNewMem);
 
+		// 데이터를 역순으로 정렬
+		lastWeekCountData.reverse();
+
+		// 먼저 확인하기 위해 값을 콘솔에 출력
+		//console.log("todayNewMem: ", todayNewMem);
+		console.log("lastWeekNewMem: ", lastWeekNewMem);
+		
+	
+	
+		function initializeChart2(data) {
 		var ctx2 = document.getElementById("chart-line").getContext("2d");
-
 		new Chart(ctx2, {
 			type: "line",
 			data: {
-				labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				labels: ["M", "T", "W", "T", "F", "Sa", "Su"],
 				datasets: [{
 					label: "Mobile apps",
 					tension: 0,
@@ -888,7 +907,7 @@
 					borderWidth: 4,
 					backgroundColor: "transparent",
 					fill: true,
-					data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+					data: data, // 데이터를 여기에 할당
 					maxBarThickness: 6
 
 				}],
@@ -952,7 +971,16 @@
 				},
 			},
 		});
-
+		}
+		// 페이지 로드 시 차트 초기화
+		//initializeChart2(lastWeekNewMem);
+		
+	</script>
+	<!--2번째 차트 영역--> 
+	
+		
+	<script>
+		// 3번째 차트 영역 
 		var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
 
 		new Chart(ctx3, {

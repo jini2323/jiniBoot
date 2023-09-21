@@ -25,6 +25,8 @@ public class QMem extends EntityPathBase<Mem> {
 
     public final StringPath arprofile = createString("arprofile");
 
+    public final StringPath arprofilepic = createString("arprofilepic");
+
     public final StringPath arstatus = createString("arstatus");
 
     public final StringPath bankaccount = createString("bankaccount");
@@ -45,11 +47,11 @@ public class QMem extends EntityPathBase<Mem> {
 
     public final NumberPath<Long> num = createNumber("num", Long.class);
 
+    public final NumberPath<Long> point = createNumber("point", Long.class);
+
     public final StringPath profilepic = createString("profilepic");
 
     public final StringPath pwd = createString("pwd");
-
-    public final EnumPath<RoleType> roleType = createEnum("roleType", RoleType.class);
 
     public final StringPath tel = createString("tel");
 

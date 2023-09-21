@@ -29,6 +29,8 @@ repositories {
 
 dependencies {
 
+	 // Apache Commons Lang3 추가
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 	
 	//타임리프
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -52,8 +54,6 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 	
-		
-	// querydsl 
 	//  QueryDSL 을 사용하기 위한 라이브러리
 	implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
 	//QClass 를 생성하기 위한 라이브러리

@@ -76,8 +76,20 @@ public class MainController {
 		model.addAttribute("todayOpenfundings",todayOpenfundings);
 		
 		
+		//대쉬보드 8. 지난 주 새로 오픈(작성x)한 펀딩 수
+		List<Long> lasgWeekNewFundings = funService.lastWeekNewFundings();
+		model.addAttribute("lasgWeekNewFundings",lasgWeekNewFundings);
+		
+		
+		
+		
 		return "admin2/dashboard";
 	}
+	
+	
+	
+	
+	
 	
 	
 	

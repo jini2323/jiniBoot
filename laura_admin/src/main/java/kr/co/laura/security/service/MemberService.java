@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.laura.security.domain.Mem;
 import kr.co.laura.security.repository.MemberRepository;
-import kr.co.laura.security.repository.QMemRepository;
+import kr.co.laura.security.repositoryQMem.QMemRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package kr.co.laura.security.repository;
+package kr.co.laura.security.repositoryQMem;
 
 import java.util.Date;
 import java.util.List;
@@ -15,7 +15,7 @@ public interface QMemRepositoryCustom  {
 	 /**
 	   * QueryDSL을 사용하여 To-Do 목록 조회
 	   */
-	List<Mem> getMemList(Mem mem);
+	//List<Mem> getMemList(Mem mem);
 	
 	List<Long> getLastWeekNewMem(Date startDate,Date endDate);
 	

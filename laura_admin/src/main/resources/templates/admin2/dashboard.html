@@ -58,12 +58,6 @@
 										class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
 										<i class="material-icons opacity-10">person</i>
 									</div>
-								<!--투데이 가입자-->
-									<!--<div class="text-end pt-1">
-										<p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
-										<h4 class="mb-0" th:text="${todayNewMem}">0</h4>
-									</div>-->
-								<!--투데이 가입자-->
 								<div class="text-end pt-1">
 							    <p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
 							    <h4 class="mb-0" th:text="${todayNewMem != null ? todayNewMem : 0}">0</h4>
@@ -186,12 +180,13 @@
 									</div>
 								</div>
 								<div class="card-body">
-									<h6 class="mb-0 ">Completed Tasks</h6>
-									<p class="text-sm ">Last Campaign Performance</p>
+									<h6 class="mb-0 ">Lastweek 오픈 펀딩 수</h6>
+									<p class="text-sm "> (<span class="font-weight-bolder">주간 업데이트 </span>) 
+										</p>
 									<hr class="dark horizontal">
 									<div class="d-flex ">
 										<i class="material-icons text-sm my-auto me-1">schedule</i>
-										<p class="mb-0 text-sm">just updated</p>
+										<p class="mb-0 text-sm">최종 업데이트 3일 전</p>
 									</div>
 								</div>
 							</div>
@@ -866,27 +861,17 @@
 <!--2번째 차트 영역--> 
 <script th:inline="javascript">
 	
-		// 오늘 새 회원 수/ 기본 값 0 설정
-		//var todayNewMem = /*[[ ${todayNewMem} ]]*/ 0;
 
 		// 저번주 새 회원 수
 		var lastWeekNewMem = /*[[ ${lastWeekNewMem} ]]*/ [];
 		
-
-		// 데이터를 풀어서 숫자 배열로 변환
-		//lastWeekNewMem = lastWeekNewMem.map(function (long) {
-		//	return long;
-		//});
-
 		initializeChart2(lastWeekNewMem);
 
 		// 데이터를 역순으로 정렬
 		lastWeekCountData.reverse();
 
 		// 먼저 확인하기 위해 값을 콘솔에 출력
-		//console.log("todayNewMem: ", todayNewMem);
 		console.log("lastWeekNewMem: ", lastWeekNewMem);
-		
 	
 	
 		function initializeChart2(data) {
@@ -978,15 +963,31 @@
 	</script>
 	<!--2번째 차트 영역--> 
 	
+	
+	
+	<!--3번째 검정 차트 영역--> 	
+	<script th:inline="javascript">
+
+		// 저번주 새로 오픈한 펀딩 수 
+		var lasgWeekNewFundings = /*[[ ${lasgWeekNewFundings} ]]*/ [];
 		
-	<script>
-		// 3번째 차트 영역 
+
+		initializeChart3(lasgWeekNewFundings);
+
+		// 데이터를 역순으로 정렬
+		lasgWeekNewFundings.reverse();
+
+		// 먼저 확인하기 위해 값을 콘솔에 출력
+		console.log("lasgWeekNewFundings: ", lasgWeekNewFundings);
+		
+		
+	function initializeChart3(data) {	
 		var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
 
 		new Chart(ctx3, {
 			type: "line",
 			data: {
-				labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				labels: ["M", "T", "W", "T", "F", "Sa", "Su"],
 				datasets: [{
 					label: "Mobile apps",
 					tension: 0,
@@ -1062,7 +1063,10 @@
 				},
 			},
 		});
+		}
 	</script>
+	<!--3번째 검정 차트 영역 끝--> 
+	
 	<!--  <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

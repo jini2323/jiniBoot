@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import kr.co.laura.security.domain.Mem;
-import kr.co.laura.security.repository.QMemRepository;
+import kr.co.laura.security.repositoryQMem.QMemRepository;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -29,7 +29,7 @@ public class QMemRepositoryTest {
 	EntityManager entityManager;
 	
 	
-
+/*
 	  @Transactional
 	  void testGetTodos() {
 
@@ -48,7 +48,9 @@ public class QMemRepositoryTest {
 	    log.debug("mems:[{}]", mems);
 	    assertTrue(!mems.isEmpty());
 	  }
-
+			*/ 
+	
+	
 	  /**
 	   * To-Do 목록을 설정
 	   */

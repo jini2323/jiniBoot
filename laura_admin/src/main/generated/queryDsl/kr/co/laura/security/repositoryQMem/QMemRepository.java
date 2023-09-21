@@ -1,4 +1,4 @@
-package kr.co.laura.security.repository;
+package kr.co.laura.security.repositoryQMem;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

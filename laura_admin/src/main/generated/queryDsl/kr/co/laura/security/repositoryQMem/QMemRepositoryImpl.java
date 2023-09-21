@@ -1,4 +1,4 @@
-package kr.co.laura.security.repository;
+package kr.co.laura.security.repositoryQMem;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,7 @@ public class QMemRepositoryImpl implements QMemRepositoryCustom {
 	private final JPAQueryFactory jpaQueryFactory;
 	
 	
-	
+	/*
 	@Override
 	public List<Mem> getMemList(Mem mem) {
 		
@@ -28,7 +28,7 @@ public class QMemRepositoryImpl implements QMemRepositoryCustom {
 				.selectFrom(qmem)
 				.fetch();
 	}
-
+	*/
 	
 	@Override
 	public List<Long> getLastWeekNewMem(Date startDate, Date endDate) {
@@ -42,10 +42,6 @@ public class QMemRepositoryImpl implements QMemRepositoryCustom {
                 .groupBy(qmem.mdate)
                 .fetch();
 	}
-	
-	
-	
-	
 	
 	
 	

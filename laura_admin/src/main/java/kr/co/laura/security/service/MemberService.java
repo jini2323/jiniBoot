@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.laura.security.domain.Mem;
 import kr.co.laura.security.repository.MemberRepository;
+import kr.co.laura.security.repository.QMemRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -19,6 +20,9 @@ public class MemberService {
 
 	@Autowired
 	private final MemberRepository memRepository;
+	
+	@Autowired
+	private final QMemRepository qmemRepository;
 	
 	//@Autowired
 	//private final MemCountRepository memCountRepository;
@@ -79,14 +83,17 @@ public class MemberService {
 	}
 	*/
 	
-    public List<Object[]> lastWeekNewMem() {
+    public List<Long> lastWeekNewMem() {
         LocalDate today = LocalDate.now();
         int currentDayOfWeek = today.getDayOfWeek().getValue();
         LocalDate previousWeekStart = today.minusDays(currentDayOfWeek).minusWeeks(1).plusDays(1);
         LocalDate previousWeekEnd = today.minusDays(currentDayOfWeek);
         Date startDate = java.sql.Date.valueOf(previousWeekStart);
         Date endDate = java.sql.Date.valueOf(previousWeekEnd);
-        return memRepository.countNewMembersByDate(startDate, endDate);
+        //return memRepository.countNewMembersByDate(startDate, endDate);
+        
+        return qmemRepository.getLastWeekNewMem(startDate, endDate);
+        
     }
 	
 	

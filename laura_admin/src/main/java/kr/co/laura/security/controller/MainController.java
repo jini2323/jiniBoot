@@ -53,7 +53,8 @@ public class MainController {
 		model.addAttribute("totalMem",totalMem);
 		
 		//대쉬보드 5 지난수 새 회원 수 
-		List<Object[]> lastWeekNewMem = memService.lastWeekNewMem();
+		//List<Object[]> lastWeekNewMem = memService.lastWeekNewMem();
+		List<Long> lastWeekNewMem = memService.lastWeekNewMem();
 		model.addAttribute("lastWeekNewMem",lastWeekNewMem);
 		
 		for (Object e : lastWeekNewMem) {

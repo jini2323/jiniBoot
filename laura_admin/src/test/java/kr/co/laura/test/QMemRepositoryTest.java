@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import kr.co.laura.security.domain.Mem;
-import kr.co.laura.security.domain.QMem;
 import kr.co.laura.security.repository.QMemRepository;
 import lombok.extern.slf4j.Slf4j;
 

@@ -53,10 +53,10 @@ public class MainController {
 		model.addAttribute("totalMem",totalMem);
 		
 		//대쉬보드 5 지난수 새 회원 수 
-		List<Long> lastWeekNewMem = memService.lastWeekNewMem();
+		List<Object[]> lastWeekNewMem = memService.lastWeekNewMem();
 		model.addAttribute("lastWeekNewMem",lastWeekNewMem);
 		
-		for (Long e : lastWeekNewMem) {
+		for (Object e : lastWeekNewMem) {
 		    System.out.println("일주일 전 새 회원수 for each 문 e : "+e);
 		    System.out.println("일주일 전 새 회원수 for each 문 크기 "+lastWeekNewMem.size());
 		    

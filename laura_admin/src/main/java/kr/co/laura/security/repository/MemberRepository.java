@@ -24,13 +24,19 @@ public interface MemberRepository extends JpaRepository<Mem, Long> {
 	Long countBy();
 
 	 // 주간 회원 수 새 회원 수
-	 @Query(value = "SELECT COUNT(*) FROM Mem m WHERE TRUNC(m.MDATE) BETWEEN TRUNC(:startDate) AND TRUNC(:endDate)", nativeQuery = true)
-	 List<Long> countNewMembersByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-	
-	 
+	// @Query(value = "SELECT COUNT(*) FROM Mem m WHERE TRUNC(m.MDATE) BETWEEN TRUNC(:startDate) AND TRUNC(:endDate)", nativeQuery = true)
+	// List<Long> countNewMembersByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 	
 	
 	//@Query(value = "SELECT COUNT(*) FROM Mem WHERE TRUNC(MDATE) BETWEEN TRUNC(:startDate) AND TRUNC(:endDate)", nativeQuery = true)
 	//List<Long> countNewMembersByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-
+	
+	 @Query(value = "SELECT TO_DATE(TO_CHAR(MDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD') AS join_date, COUNT(*) AS member_count " +
+		        "FROM Mem " +
+		        "WHERE MDATE BETWEEN :startDate AND :endDate " +
+		        "GROUP BY TO_DATE(TO_CHAR(MDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD') " +
+		        "ORDER BY TO_DATE(TO_CHAR(MDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')", nativeQuery = true)
+		List<Object[]> countNewMembersByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+	 
+	 
 }

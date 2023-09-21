@@ -50,6 +50,8 @@ public class MemberService {
 	
 		return lasgWeekNewMem;
 	}*/
+	
+	/*
 	public List<Long> lastWeekNewMem(){
 		
 		List<Long> lastWeekNewMem = new ArrayList<>();
@@ -75,6 +77,17 @@ public class MemberService {
 		
 		return lastWeekNewMem;
 	}
+	*/
+	
+    public List<Object[]> lastWeekNewMem() {
+        LocalDate today = LocalDate.now();
+        int currentDayOfWeek = today.getDayOfWeek().getValue();
+        LocalDate previousWeekStart = today.minusDays(currentDayOfWeek).minusWeeks(1).plusDays(1);
+        LocalDate previousWeekEnd = today.minusDays(currentDayOfWeek);
+        Date startDate = java.sql.Date.valueOf(previousWeekStart);
+        Date endDate = java.sql.Date.valueOf(previousWeekEnd);
+        return memRepository.countNewMembersByDate(startDate, endDate);
+    }
 	
 	
 	

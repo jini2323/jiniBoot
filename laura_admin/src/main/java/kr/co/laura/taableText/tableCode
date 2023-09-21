@@ -1,0 +1,176 @@
+
+--1. 댓글 작성할 때마다 트리거 실행 :  evStatus가 y 2개이상이 안되도록
+CREATE OR REPLACE TRIGGER EVPBOARD_BEFORE_INSERT
+BEFORE INSERT ON EVPBOARD
+FOR EACH ROW
+DECLARE
+    count_y NUMBER;
+BEGIN
+    -- Check if the user has already posted a 'y' status comment for the same event
+    SELECT COUNT(*)
+    INTO count_y
+    FROM EVPBOARD
+    WHERE EVBOARDNUM = :NEW.EVBOARDNUM
+    AND EVWRITER = :NEW.EVWRITER
+    AND EVSTATUS = 'y';
+
+    IF count_y = 0 THEN
+       -- If the user has not posted a 'y' status comment, set EVSTATUS to 'n'
+         IF :NEW.EVSTATUS = 'n' OR :NEW.EVSTATUS = 'y' THEN
+            :NEW.EVSTATUS := :NEW.EVSTATUS;
+        END IF;
+    ELSIF count_y > 0 THEN
+        -- If the user has already posted a 'y' status comment, set EVSTATUS to 'n'
+        :NEW.EVSTATUS := 'n';
+        DBMS_OUTPUT.PUT_LINE('이미 이 이벤트에 참여한 회원 입니다.');
+    END IF;
+END;
+/
+
+
+
+--2. 댓글 수정 할 때마다 프로시저 실행 :  evStatus가 y 2개이상이 안되도록 (트리거가 계속 오류나서 프로시저로 함..)
+
+CREATE OR REPLACE PROCEDURE MODIFY_EVPBOARD(
+    p_evpnum IN NUMBER,
+    p_evid IN VARCHAR2,
+    p_evboardnum IN NUMBER,
+    p_evcont IN CLOB,
+    p_evstatus IN VARCHAR2
+) AS
+    count_y NUMBER;
+BEGIN
+    -- Check if the user has already posted a 'y' status comment for the same event
+    SELECT COUNT(*)
+    INTO count_y
+    FROM EVPBOARD
+    WHERE EVBOARDNUM = p_evboardnum
+    AND EVID = p_evid
+    AND EVSTATUS = 'y';
+
+
+	--y일때
+-- 해당 게시물에,그 회원이 작성한  'y' 상태인 댓글이 있는 경우
+IF count_y >= 1 THEN
+    -- 기존 'y' 상태여도 'n'으로 변경 가능
+    UPDATE EVPBOARD
+    SET EVCONT = p_evcont,
+        EVSTATUS = CASE WHEN EVPBOARD.EVSTATUS = 'y' THEN p_evstatus ELSE 'n' END    --y면 제공된 값으로 업데이트, 아닐 경우(n) 무조건 n 유지
+    WHERE EVPNUM = p_evpnum;
+ELSE
+    -- 해당 게시물에 그 회원이 작성 'y' 상태인 댓글이 없는 경우, 제공된 값으로 업데이트
+    UPDATE EVPBOARD
+    SET EVCONT = p_evcont,
+        EVSTATUS = p_evstatus
+    WHERE EVPNUM = p_evpnum;
+END IF;
+
+    COMMIT;
+
+    EXCEPTION
+        WHEN OTHERS THEN
+            ROLLBACK;
+            RAISE;
+END;
+/
+
+
+
+----------------------------------
+--3. 프로시저 부분 매퍼 수정.
+
+<update id="modComm" parameterType="evvo">
+    {call MODIFY_EVPBOARD(
+        #{evpNum, jdbcType=NUMERIC},
+        #{evid, jdbcType=VARCHAR},
+        #{evboardnum, jdbcType=NUMERIC},
+        #{evCont, jdbcType=CLOB},
+        #{evStatus, jdbcType=VARCHAR}
+    )}
+</update>
+
+
+
+
+-----------------운영자 사이트
+--운영자 계정 테이블
+
+CREATE TABLE ADMINS (
+    ADNUM NUMBER(19,0) NOT NULL, -- 기본키
+    DEPTNO NUMBER NOT NULL, -- 부서번호
+    ADTEL VARCHAR2(20) NOT NULL, -- 담당자 번호
+    ADEMAIL VARCHAR2(30) NOT NULL UNIQUE, -- 담당자 아이디(이메일) 유니크 걸기
+    ADPWD VARCHAR2(30) NOT NULL, -- 비번
+    ROLE_TYPE VARCHAR2(20) DEFAULT 'ADMIN' NOT NULL,
+    PRIMARY KEY (ADNUM)
+);
+
+CREATE SEQUENCE ADMINS_SEQ
+INCREMENT BY 1 START WITH 1;
+
+
+--방문자수 카운트 테이블
+CREATE TABLE VISIT_COUNT(
+
+	REGDATE DATE NOT NULL,
+	VCOUNT NUMBER NOT NULL
+);
+
+
+
+CREATE SEQUENCE ADMINS_SEQ
+INCREMENT BY 1 START WITH 1;
+ADMINS_SEQ
+
+
+---------------회원가입때마다 실행 트리거 (회원수 관리 테이블)
+
+CREATE TABLE MEMCOUNT (
+		MCNUM NUMBER PRIMARY KEY,
+    JDATE DATE NOT NULL,      -- 회원가입일
+    TODAY_COUNT_MEM NUMBER DEFAULT 1 NOT NULL,  -- 오늘 가입자 수 (기본값 0)
+    TOTAL_MEM NUMBER DEFAULT 100 NOT NULL -- 총 회원수 (기본값 0)
+);
+CREATE SEQUENCE MCNUM_SEQ
+INCREMENT BY 1 START WITH 1;
+
+--트리거
+CREATE OR REPLACE TRIGGER update_memcount_trigger
+AFTER INSERT ON MEM
+FOR EACH ROW
+DECLARE
+    today DATE := TRUNC(SYSDATE); -- 오늘 날짜만 가져오기
+BEGIN
+    -- JDATE 업데이트 (그날의 SYSDATE로 설정) jdate가 오늘하고 다르면 오늘날짜로 업뎃
+    UPDATE MEMCOUNT
+    SET JDATE = today
+    WHERE JDATE <> today;
+
+    -- 오늘 가입자 수 업데이트
+    IF TRUNC(:new.mdate) = today THEN -- mdate가 오늘하고 같다면
+        -- 오늘 날짜에 가입한 경우 TODAY_COUNT_MEM 누적
+        UPDATE MEMCOUNT
+        SET TODAY_COUNT_MEM = TODAY_COUNT_MEM + 1;
+    ELSE
+        -- 새로운 날짜에 회원 가입이 있을 경우 TODAY_COUNT_MEM 초기화
+        UPDATE MEMCOUNT
+        SET TODAY_COUNT_MEM = 1;
+    END IF;
+
+    -- 총 회원수 업데이트
+    UPDATE MEMCOUNT
+    SET TOTAL_MEM = TOTAL_MEM + 1;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('트리거에서 오류 발생: ' || SQLERRM);
+END;
+/
+
+
+
+
+
+
+
+

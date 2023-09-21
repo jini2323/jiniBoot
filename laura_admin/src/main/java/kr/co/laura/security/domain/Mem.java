@@ -3,6 +3,7 @@ package kr.co.laura.security.domain;
 
 import java.util.Date;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -17,9 +18,11 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 
 @NoArgsConstructor
 @Table(name = "MEM")
@@ -66,11 +69,12 @@ public class Mem {
 	
 
 	// columnDefinition = "default '브론즈' " 
+	@ColumnDefault("브론즈")
 	@Column(name = "grade", nullable = false)
 	private String grade; 
 	
-	
 	//여기서 부터 인증 관련 정보  , columnDefinition = "default '미인증' "
+	@ColumnDefault("미인증")
 	@Column(name = "arstatus", nullable = false)
 	private String arstatus;
 	
@@ -100,9 +104,12 @@ public class Mem {
 
 	
 	//, columnDefinition = "default 'UNVERIFIED' "
-	//@Enumerated(EnumType.STRING)
-	//@Column(name = "ROLE_TYPE", nullable = false)
-	//private RoleType roleType;
+	
+	@Transient
+	@ColumnDefault("UNVERIFIED")
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ROLE_TYPE", nullable = false)
+	private RoleType roleType;
 	
 	
 	
@@ -115,7 +122,7 @@ public class Mem {
 	Date mdate, String grade,
 	String arstatus, String addr,
 	String bankaccount, String arprofilepic, String arprofile,
-	Date ardate, Long point ) //RoleType roleType
+	Date ardate, Long point,RoleType roleType ) //RoleType roleType
 	{
   
   this.num = num; 
@@ -136,7 +143,7 @@ public class Mem {
   this.arprofile = arprofile; 
   this.ardate =ardate; 
   this.point = (long) 300;
-  //this.roleType = RoleType.UNVERIFIED;
+  this.roleType = RoleType.UNVERIFIED;
   
   System.out.println("builder로 일반회원 생성!"); System.out.println(num); //여기서null이 뜬다. 
  // System.out.println("생성된 회원의 권한:"+roleType); 

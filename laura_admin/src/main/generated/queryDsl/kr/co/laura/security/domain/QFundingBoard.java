@@ -23,11 +23,15 @@ public class QFundingBoard extends EntityPathBase<FundingBoard> {
 
     public final StringPath content = createString("content");
 
+    public final StringPath contentimg = createString("contentimg");
+
     public final NumberPath<Long> cost = createNumber("cost", Long.class);
 
     public final DateTimePath<java.util.Date> fdate = createDateTime("fdate", java.util.Date.class);
 
     public final StringPath funbudget = createString("funbudget");
+
+    public final StringPath funcategory = createString("funcategory");
 
     public final NumberPath<Long> funnum = createNumber("funnum", Long.class);
 

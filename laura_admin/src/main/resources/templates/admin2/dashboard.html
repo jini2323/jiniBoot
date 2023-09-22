@@ -20,7 +20,7 @@
 					<h6 class="font-weight-bolder mb-0">Dashboard</h6>
 				</nav>
 
-
+				
 				<!-- navbar 공통부분 자리 -->
 				<th:block th:replace="layout/nav :: navFragment"></th:block>
 
@@ -104,9 +104,9 @@
 										<i class="material-icons opacity-10">weekend</i>
 									</div>
 									<div class="text-end pt-1">
-										<p class="text-sm mb-0 text-capitalize">Today Total 펀딩참여 금액</p>
-										<h4 class="mb-0" th:text="${totalTodayMoney}"></h4>
-									</div> 
+   									 <p class="text-sm mb-0 text-capitalize">Today Total 펀딩참여 금액</p>
+    								<h4 class="mb-0" th:text="${totalTodayMoney} ? ${totalTodayMoney} : '0'"></h4>
+									</div>
 								</div>
 								<hr class="dark horizontal my-0">
 								<div class="card-footer p-3">
@@ -200,18 +200,20 @@
 								<div class="card-header pb-0">
 									<div class="row">
 										<div class="col-lg-6 col-7">
-											<h6>Projects</h6>
+											<h6>최신 펀딩</h6>
 											<p class="text-sm mb-0">
 												<i class="fa fa-check text-info" aria-hidden="true"></i>
-												<span class="font-weight-bold ms-1">30 done</span> this month
+												<span class="font-weight-bold ms-1">6 new fundings</span> 2시간 전
 											</p>
 										</div>
 										<div class="col-lg-6 col-5 my-auto text-end">
+											
 											<div class="dropdown float-lg-end pe-4">
-												<a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
+												<!-- ... <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
 													aria-expanded="false">
 													<i class="fa fa-ellipsis-v text-secondary"></i>
-												</a>
+												</a>--> 
+												
 												<ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
 													aria-labelledby="dropdownTable">
 													<li><a class="dropdown-item border-radius-md"
@@ -232,19 +234,21 @@
 												<tr>
 													<th
 														class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-														Companies</th>
+														펀딩제목</th>
 													<th
 														class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-														Members</th>
+														펀딩참여 수</th>
 													<th
 														class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-														Budget</th>
+														목표금액</th>
 													<th
 														class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-														Completion</th>
+														목표달성률</th>
 												</tr>
 											</thead>
 											<tbody>
+												
+												<!--첫번째 영역-->
 												<tr>
 													<td>
 														<div class="d-flex px-2 py-1">
@@ -307,6 +311,10 @@
 														</div>
 													</td>
 												</tr>
+												<!--첫번째 영역 끝-->
+												
+												
+												<!--두번째 영역-->
 												<tr>
 													<td>
 														<div class="d-flex px-2 py-1">
@@ -355,6 +363,10 @@
 														</div>
 													</td>
 												</tr>
+												<!--두번째 영역 끝-->
+												
+												
+												<!--세번째 영역-->
 												<tr>
 													<td>
 														<div class="d-flex px-2 py-1">
@@ -403,6 +415,9 @@
 														</div>
 													</td>
 												</tr>
+												<!--세번째 영역 끝-->
+												
+												<!--네번째 영역-->
 												<tr>
 													<td>
 														<div class="d-flex px-2 py-1">
@@ -465,6 +480,10 @@
 														</div>
 													</td>
 												</tr>
+												<!--네번째 영역-->
+												
+												
+												<!--다섯번째 영역-->
 												<tr>
 													<td>
 														<div class="d-flex px-2 py-1">
@@ -506,6 +525,9 @@
 														</div>
 													</td>
 												</tr>
+												<!--다섯번째 영역 끝-->
+												
+												<!--여섯번째 영역-->
 												<tr>
 													<td>
 														<div class="d-flex px-2 py-1">
@@ -554,6 +576,8 @@
 														</div>
 													</td>
 												</tr>
+												<!--여섯번째 영역-->
+												
 											</tbody>
 										</table>
 									</div>

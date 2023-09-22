@@ -31,7 +31,6 @@ public class QMem extends EntityPathBase<Mem> {
 
     public final StringPath bankaccount = createString("bankaccount");
 
-    
     public final DateTimePath<java.util.Date> birthday = createDateTime("birthday", java.util.Date.class);
 
     public final StringPath email = createString("email");

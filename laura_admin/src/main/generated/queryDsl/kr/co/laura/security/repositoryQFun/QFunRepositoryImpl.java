@@ -1,14 +1,11 @@
 package kr.co.laura.security.repositoryQFun;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -46,6 +43,7 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	    List<FundingDTO> top6FundingList = jpaQueryFactory
 	            .select(Projections.constructor(
 	                FundingDTO.class,
+	                qFun.funnum,
 	                qFun.funtitle,
 	                qFun.funwriter,
 	                qFun.targetprice,
@@ -53,7 +51,7 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	            .from(qFun)
 	            .leftJoin(qFp).on(qFun.funnum.eq(qFp.funnum_num))
 	            .where(qFun.funnum.eq(qFp.funnum_num)) // 특정 funnum에 대한 필터링 추
-	            .groupBy(qFun.funtitle, qFun.funwriter, qFun.targetprice)
+	            .groupBy(qFun.funnum, qFun.funtitle, qFun.funwriter, qFun.targetprice)
 	            .orderBy(qFp.funmoney.sum().desc())
 	            .limit(6)
 	            .fetch();
@@ -65,9 +63,22 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	}
 	
 	
-
+	//3
+	public List<Long> calFundingAchieveRates(List<FundingDTO> top6FundingList) {
+	    List<Long> achievementRates = new ArrayList<>();
+	    for (FundingDTO dto : top6FundingList) {
+	        Long funnum = dto.getFunnum(); // 또는 dto에서 funnum을 가져오는 방법에 따라 다를 수 있음
+	        Long achievementRate = calFundingAchieve(funnum);
+	        achievementRates.add(achievementRate);
+	    }
+	    return achievementRates;
+	}
+	
+	
+	
+ 
 	// 2 펀딩 목표달성률 계산
-	public Long calFundingAchieveRate(Long funnum) {
+	public Long calFundingAchieve(Long funnum) {
 
 		// FUNDING_PARTI 테이블에서 해당 펀딩 글 (funnum) 에 대한 총 펀딩 금액을 계산
 		QFundingBoard qfun = QFundingBoard.fundingBoard;

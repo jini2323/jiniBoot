@@ -79,27 +79,34 @@ public class FundingService {
 	 
 	 //펀딩리스트 최고금액 top6게시글을 불러오되, 
 	//각 게시글의 총 목표금액 달성률을 같이 가져온다.
-	 public List<FundingDTO> top6FundingListandAchieveRate() { //Long funnum
+	
+	public List<FundingDTO> top6FundingList(){
+		List<FundingDTO> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();
+		return top6FundingList;
+	}
+	
+	
+	 public List<Long> top6dAchieveRates() { //Long funnum
 		 // 펀딩 금액 달성률 계산
 		 	//Long funnum = 0L;
-		  //  Long achievementRate = qFunRepositoryImpl.calFundingAchieveRate(funnum);
-		  //  System.out.println("펀딩 달성률 계산: "+achievementRate);
+		  //Long achievementRate = qFunRepositoryImpl.calFundingAchieveRates();
+		 List<FundingDTO> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();
+		 List<Long> achievementRates = qFunRepositoryImpl.calFundingAchieveRates(top6FundingList);
+		 
+		  System.out.println("펀딩 달성률 계산: "+achievementRates.get(0));
 		
 		// fmoney의 합이 가장 높은 6개의 펀딩 게시글 가져오기
 		// List<FundingBoard> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();    
 		 
-		 List<FundingDTO> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();
-		 
-		    
 		    //최신펀딩 6개 
 		    //List<FundingBoard> top6Fundings = qFunRepositoryImpl.findTop6OrderBySdateDesc();
 		   // System.out.println("최신펀딩 6개 : "+top6Fundings.get(0));
 		// List<Tuple> top6FundingTuples = qFunRepositoryImpl.showTop6FundingsByFunMoney();
 	        
 		    
-		    //return achievementRate;
+		    return achievementRates;
 		    
-		    return top6FundingList;
+		    
 		    
 	 }
 	

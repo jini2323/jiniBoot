@@ -100,16 +100,18 @@ public class MainController {
 		//Long achievementRate = funService.achievementRate(2L);
 		//model.addAttribute("achievementRate",achievementRate);
 		//List<FundingBoard> top6FundingList = funService.top6FundingListandAchieveRate();
-		QFundingBoard qFun = QFundingBoard.fundingBoard;
+		//QFundingBoard qFun = QFundingBoard.fundingBoard;
 		//List<Tuple> top6FundingTuples = funService.top6FundingListandAchieveRate();
-		List<FundingDTO> top6FundingList = funService.top6FundingListandAchieveRate();
-
 		
+		//모인 금액이 가장 많은 상위 6개 펀딩 게시글 
+		List<FundingDTO> top6FundingList = funService.top6FundingList();
 		model.addAttribute("top6FundingList",top6FundingList);
 		System.out.println(top6FundingList);
 		
-		
-		
+		//목표금액 달성률 
+		List<Long> achievementRates = funService.top6dAchieveRates();
+		model.addAttribute("achievementRates",achievementRates);
+		System.out.println("컨트롤러/ 달성률:"+achievementRates);
 		
 		
 		

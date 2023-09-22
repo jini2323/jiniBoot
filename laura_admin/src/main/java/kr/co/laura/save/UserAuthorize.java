@@ -11,12 +11,11 @@
  * 
  * @Retention(RetentionPolicy.RUNTIME)
  * 
- * @PreAuthorize("hasAnyRole('ADMIN')") public @interface AdminAuthorize { //사용자
- * 정의 애너테이션 : @AdminAuthorize => 해당 메서드는 admin 역할 가진 사용자만 호출가능, 컨트롤에도 사용가능
- * 
+ * @PreAuthorize("hasAnyRole('USER')") public @interface UserAuthorize {
  * 
  * }
  */
+
 
 
 

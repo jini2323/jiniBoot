@@ -88,7 +88,7 @@ public class Mem {
 	@Column(name = "arprofilepic")
 	private String arprofilepic; // 인증서? 
 	
-	@Lob
+//	@Lob
 	@Column(name = "arprofile")
 	private String arprofile; // 인증서? 
 	

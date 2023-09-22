@@ -7,7 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.querydsl.core.Tuple;
+
 import kr.co.laura.security.domain.FundingBoard;
+import kr.co.laura.security.dto.FundingDTO;
 import kr.co.laura.security.repository.FunPartiRepository;
 import kr.co.laura.security.repository.FundingRepository;
 import kr.co.laura.security.repositoryQFun.QFunRepository;
@@ -74,21 +77,29 @@ public class FundingService {
 	}
 	
 	 
-	 //펀딩 금액 달성률 테스트  펀딩번호: 2 , 펀딩 참여번호 3
-	 public Long achievementRate(Long funnum) {
+	 //펀딩리스트 최고금액 top6게시글을 불러오되, 
+	//각 게시글의 총 목표금액 달성률을 같이 가져온다.
+	 public List<FundingDTO> top6FundingListandAchieveRate() { //Long funnum
 		 // 펀딩 금액 달성률 계산
-		    Long achievementRate = qFunRepositoryImpl.calFundingAchieveRate(funnum);
-		    System.out.println("펀딩 달성률 계산: "+achievementRate);
+		 	//Long funnum = 0L;
+		  //  Long achievementRate = qFunRepositoryImpl.calFundingAchieveRate(funnum);
+		  //  System.out.println("펀딩 달성률 계산: "+achievementRate);
+		
+		// fmoney의 합이 가장 높은 6개의 펀딩 게시글 가져오기
+		// List<FundingBoard> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();    
+		 
+		 List<FundingDTO> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();
+		 
 		    
 		    //최신펀딩 6개 
 		    //List<FundingBoard> top6Fundings = qFunRepositoryImpl.findTop6OrderBySdateDesc();
 		   // System.out.println("최신펀딩 6개 : "+top6Fundings.get(0));
-		    
+		// List<Tuple> top6FundingTuples = qFunRepositoryImpl.showTop6FundingsByFunMoney();
 	        
 		    
+		    //return achievementRate;
 		    
-		    
-		    return achievementRate;
+		    return top6FundingList;
 		    
 	 }
 	

@@ -8,6 +8,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -27,6 +29,11 @@ public class FundingParti {
 	@Id
 	@Column(name = "fmem_num", nullable = false)
 	private Long fmem_num; // 펀딩참여하는 회원 번호 외래키
+	
+	@ManyToOne
+	@JoinColumn(name = "funnum_num", referencedColumnName = "funnum", insertable = false, updatable = false)
+	private FundingBoard fundingBoard; // FundingBoard 엔티티와의 관계 설정
+	
 	
 	@Id
 	@Column(name = "funnum_num", nullable = false)

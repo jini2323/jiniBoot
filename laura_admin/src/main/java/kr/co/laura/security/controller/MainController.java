@@ -1,5 +1,7 @@
 package kr.co.laura.security.controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.querydsl.core.Tuple;
+
+import kr.co.laura.security.domain.FundingBoard;
+import kr.co.laura.security.domain.QFundingBoard;
 import kr.co.laura.security.domain.Visit;
+import kr.co.laura.security.dto.FundingDTO;
 import kr.co.laura.security.service.FundingService;
 import kr.co.laura.security.service.MemberService;
 import kr.co.laura.security.service.VisitService;
@@ -90,8 +97,20 @@ public class MainController {
 		
 		//대쉬보드 11. 펀딩 달성률 계산
 		///펀딩 금액 달성률 테스트  펀딩번호: 2 , 펀딩 참여번호 3
-		Long achievementRate = funService.achievementRate(2L);
-		model.addAttribute("achievementRate",achievementRate);
+		//Long achievementRate = funService.achievementRate(2L);
+		//model.addAttribute("achievementRate",achievementRate);
+		//List<FundingBoard> top6FundingList = funService.top6FundingListandAchieveRate();
+		QFundingBoard qFun = QFundingBoard.fundingBoard;
+		//List<Tuple> top6FundingTuples = funService.top6FundingListandAchieveRate();
+		List<FundingDTO> top6FundingList = funService.top6FundingListandAchieveRate();
+
+		
+		model.addAttribute("top6FundingList",top6FundingList);
+		System.out.println(top6FundingList);
+		
+		
+		
+		
 		
 		
 		return "admin2/dashboard";

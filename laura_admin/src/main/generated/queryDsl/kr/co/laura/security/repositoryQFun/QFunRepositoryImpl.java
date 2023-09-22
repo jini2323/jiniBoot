@@ -4,15 +4,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jakarta.annotation.PostConstruct;
 import kr.co.laura.security.domain.FundingBoard;
 import kr.co.laura.security.domain.QFundingBoard;
 import kr.co.laura.security.domain.QFundingParti;
+import kr.co.laura.security.dto.FundingDTO;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -21,9 +25,8 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 
 	private final JPAQueryFactory jpaQueryFactory;
 
-	//private static List<FundingBoard> funNew6Nums = new ArrayList<>();
+	// private static List<FundingBoard> funNew6Nums = new ArrayList<>();
 
-	
 	// 지난주 새로 오픈한 펀딩 수
 	@Override
 	public List<Long> getLastWeekNewFunding(Date startDate, Date endDate) {
@@ -32,18 +35,43 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 				.groupBy(qfun.sdate).fetch();
 	}
 
-
-	// 1 최신 6개의 펀딩 게시글을 가져오기
-	public List<FundingBoard> showNew6fundings() {
-		QFundingBoard qfun = QFundingBoard.fundingBoard;
-
-		// 6개 최신 펀딩 게시글 가져오기
-		List<FundingBoard> funNew6list = jpaQueryFactory.selectFrom(qfun) // 모든 행 가져오는 의미
-				.orderBy(qfun.sdate.desc()).limit(6).fetch();
-		return funNew6list;
-	} 
-
 	
+	
+	
+	public List<FundingDTO> showTop6FundingsByFunMoney() {
+	    QFundingBoard qFun = QFundingBoard.fundingBoard;
+	    QFundingParti qFp = QFundingParti.fundingParti;
+
+	    // fmoney의 합이 가장 높은 6개의 펀딩 게시글을 가져옵니다.
+		/*
+		 * List<Tuple> top6FundingTuples = jpaQueryFactory .select(qFun.funtitle,
+		 * qFun.funwriter, qFun.targetprice, qFp.funmoney.sum().as("totalFunMoney"))
+		 * .from(qFun) .leftJoin(qFp).on(qFun.funnum.eq(qFp.funnum_num))
+		 * .groupBy(qFun.funtitle, qFun.funwriter, qFun.targetprice)
+		 * .orderBy(qFp.funmoney.sum().desc()) .limit(6) .fetch();
+		 */
+	    
+	    List<FundingDTO> top6FundingList = jpaQueryFactory
+	            .select(Projections.constructor(
+	                FundingDTO.class,
+	                qFun.funtitle,
+	                qFun.funwriter,
+	                qFun.targetprice,
+	                qFp.funmoney.sum().as("totalFunMoney")))
+	            .from(qFun)
+	            .leftJoin(qFp).on(qFun.funnum.eq(qFp.funnum_num))
+	            .groupBy(qFun.funtitle, qFun.funwriter, qFun.targetprice)
+	            .orderBy(qFp.funmoney.sum().desc())
+	            .limit(6)
+	            .fetch();
+	    
+
+	    return top6FundingList;
+	    
+	}
+	
+	
+
 	// 2 펀딩 목표달성률 계산
 	public Long calFundingAchieveRate(Long funnum) {
 

@@ -237,7 +237,7 @@
 														펀딩제목</th>
 													<th
 														class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-														펀딩참여 수</th>
+														작성자</th>
 													<th
 														class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 														목표금액</th>
@@ -245,11 +245,11 @@
 														class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 														목표달성률</th>
 												</tr>
-											</thead>
-											<tbody>
-												
-												<!--첫번째 영역-->
-												<tr>
+												</thead>
+												<tbody>
+										<!--첫번째 영역-->		
+				
+												<tr th:each="top6FundingList : ${top6FundingList}">
 													<td>
 														<div class="d-flex px-2 py-1">
 															<div>
@@ -257,7 +257,7 @@
 																	class="avatar avatar-sm me-3" alt="xd">
 															</div>
 															<div class="d-flex flex-column justify-content-center">
-																<h6 class="mb-0 text-sm" th:text="${achievementRate + '%'}"></h6>
+																<h6 class="mb-0 text-sm" th:text="${top6FundingList.funtitle}"></h6>
 															</div>
 														</div>
 													</td>
@@ -270,36 +270,13 @@
 																<img src="static/resources/img/template/team-1.jpg"
 																	alt="team1">
 															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Romina Hadid">
-																<img src="static/resources/img/template/team-2.jpg"
-																	alt="team2">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Alexander Smith">
-																<img src="static/resources/img/template/team-3.jpg"
-																	alt="team3">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Jessica Doe">
-																<img src="static/resources/img/template/team-4.jpg"
-																	alt="team4">
-															</a>
 														</div>
 													</td>
 													<td class="align-middle text-center text-sm">
-														<span class="text-xs font-weight-bold"> $14,000 </span>
+														<span class="text-xs font-weight-bold" th:text="${top6FundingList.funwriter}"></span>
 													</td>
-													<td class="align-middle">
-														
-														
-													<!--	<div class="progress-wrapper w-75 mx-auto">
+													<!--<td class="align-middle">
+														<div class="progress-wrapper w-75 mx-auto">
 															<div class="progress-info">
 																<div class="progress-percentage">
 																	<span class="text-xs font-weight-bold" th:text="${achievementRate + '%'}"></span>
@@ -314,7 +291,28 @@
 															</div>
 														</div>
 														-->
-													<!--목표금액 달성률 구역-->
+														
+													<!--목표금액 달성률 구역 아까꺼 -> 
+													<div class="progress-wrapper w-75 mx-auto">
+													    <div class="progress-info">
+													        <div class="progress-percentage">
+													            <span class="text-xs font-weight-bold" th:text="${achievementRate + '%'}"></span>
+													        </div>
+													    </div>
+													    <div class="progress">
+													        <div class="progress-bar bg-gradient-info" role="progressbar"
+													            th:style="'width: ' + ${achievementRate} + '%;'"
+													            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+													            <span class="visually-hidden" th:text="${achievementRate + '%'}"></span>
+													        </div>
+													    </div>
+													</div>-->
+													
+													<!--목표금액 달성률 구역-->	
+													
+													
+														<!--목표금액 달성률 구역-->
+												<!--		<td class="align-middle">
 													<div class="progress-wrapper w-75 mx-auto">
 													    <div class="progress-info">
 													        <div class="progress-percentage">
@@ -329,275 +327,25 @@
 													        </div>
 													    </div>
 													</div>
-													<!--목표금액 달성률 구역-->									
+													-->
+													
+													
+													<!--목표금액 달성률 구역-->	
+																					
 													</td>
-												</tr>
-												<!--첫번째 영역 끝-->
+												</tr>	
+				
+				
+				
+				
+				
+				
+											
 												
+									
 												
-												<!--두번째 영역-->
-												<tr>
-													<td>
-														<div class="d-flex px-2 py-1">
-															<div>
-																<img src="static/resources/img/template/small-logos/logo-atlassian.svg"
-																	class="avatar avatar-sm me-3" alt="atlassian">
-															</div>
-															<div class="d-flex flex-column justify-content-center">
-																<h6 class="mb-0 text-sm">Add Progress Track</h6>
-															</div>
-														</div>
-													</td>
-													<td>
-														<div class="avatar-group mt-2">
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Romina Hadid">
-																<img src="static/resources/img/template/team-2.jpg"
-																	alt="team5">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Jessica Doe">
-																<img src="static/resources/img/template/team-4.jpg"
-																	alt="team6">
-															</a>
-														</div>
-													</td>
-													<td class="align-middle text-center text-sm">
-														<span class="text-xs font-weight-bold"> $3,000 </span>
-													</td>
-													<td class="align-middle">
-														<div class="progress-wrapper w-75 mx-auto">
-															<div class="progress-info">
-																<div class="progress-percentage">
-																	<span class="text-xs font-weight-bold">10%</span>
-																</div>
-															</div>
-															<div class="progress">
-																<div class="progress-bar bg-gradient-info w-10"
-																	role="progressbar" aria-valuenow="10"
-																	aria-valuemin="0" aria-valuemax="100"></div>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<!--두번째 영역 끝-->
+				<!--첫번째 영역 끝-->
 												
-												
-												<!--세번째 영역-->
-												<tr>
-													<td>
-														<div class="d-flex px-2 py-1">
-															<div>
-																<img src="static/resources/img/template/small-logos/logo-slack.svg"
-																	class="avatar avatar-sm me-3" alt="team7">
-															</div>
-															<div class="d-flex flex-column justify-content-center">
-																<h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-															</div>
-														</div>
-													</td>
-													<td>
-														<div class="avatar-group mt-2">
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Romina Hadid">
-																<img src="static/resources/img/template/team-3.jpg"
-																	alt="team8">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Jessica Doe">
-																<img src="static/resources/img/template/team-1.jpg"
-																	alt="team9">
-															</a>
-														</div>
-													</td>
-													<td class="align-middle text-center text-sm">
-														<span class="text-xs font-weight-bold"> Not set </span>
-													</td>
-													<td class="align-middle">
-														<div class="progress-wrapper w-75 mx-auto">
-															<div class="progress-info">
-																<div class="progress-percentage">
-																	<span class="text-xs font-weight-bold">100%</span>
-																</div>
-															</div>
-															<div class="progress">
-																<div class="progress-bar bg-gradient-success w-100"
-																	role="progressbar" aria-valuenow="100"
-																	aria-valuemin="0" aria-valuemax="100"></div>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<!--세번째 영역 끝-->
-												
-												<!--네번째 영역-->
-												<tr>
-													<td>
-														<div class="d-flex px-2 py-1">
-															<div>
-																<img src="static/resources/img/template/small-logos/logo-spotify.svg"
-																	class="avatar avatar-sm me-3" alt="spotify">
-															</div>
-															<div class="d-flex flex-column justify-content-center">
-																<h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-															</div>
-														</div>
-													</td>
-													<td>
-														<div class="avatar-group mt-2">
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Ryan Tompson">
-																<img src="static/resources/img/template/team-4.jpg"
-																	alt="user1">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Romina Hadid">
-																<img src="static/resources/img/template/team-3.jpg"
-																	alt="user2">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Alexander Smith">
-																<img src="static/resources/img/template/team-4.jpg"
-																	alt="user3">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Jessica Doe">
-																<img src="static/resources/img/template/team-1.jpg"
-																	alt="user4">
-															</a>
-														</div>
-													</td>
-													<td class="align-middle text-center text-sm">
-														<span class="text-xs font-weight-bold"> $20,500 </span>
-													</td>
-													<td class="align-middle">
-														<div class="progress-wrapper w-75 mx-auto">
-															<div class="progress-info">
-																<div class="progress-percentage">
-																	<span class="text-xs font-weight-bold">100%</span>
-																</div>
-															</div>
-															<div class="progress">
-																<div class="progress-bar bg-gradient-success w-100"
-																	role="progressbar" aria-valuenow="100"
-																	aria-valuemin="0" aria-valuemax="100"></div>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<!--네번째 영역-->
-												
-												
-												<!--다섯번째 영역-->
-												<tr>
-													<td>
-														<div class="d-flex px-2 py-1">
-															<div>
-																<img src="static/resources/img/template/small-logos/logo-jira.svg"
-																	class="avatar avatar-sm me-3" alt="jira">
-															</div>
-															<div class="d-flex flex-column justify-content-center">
-																<h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-															</div>
-														</div>
-													</td>
-													<td>
-														<div class="avatar-group mt-2">
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Ryan Tompson">
-																<img src="static/resources/img/template/team-4.jpg"
-																	alt="user5">
-															</a>
-														</div>
-													</td>
-													<td class="align-middle text-center text-sm">
-														<span class="text-xs font-weight-bold"> $500 </span>
-													</td>
-													<td class="align-middle">
-														<div class="progress-wrapper w-75 mx-auto">
-															<div class="progress-info">
-																<div class="progress-percentage">
-																	<span class="text-xs font-weight-bold">25%</span>
-																</div>
-															</div>
-															<div class="progress">
-																<div class="progress-bar bg-gradient-info w-25"
-																	role="progressbar" aria-valuenow="25"
-																	aria-valuemin="0" aria-valuemax="25"></div>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<!--다섯번째 영역 끝-->
-												
-												<!--여섯번째 영역-->
-												<tr>
-													<td>
-														<div class="d-flex px-2 py-1">
-															<div>
-																<img src="static/resources/img/template/small-logos/logo-invision.svg"
-																	class="avatar avatar-sm me-3" alt="invision">
-															</div>
-															<div class="d-flex flex-column justify-content-center">
-																<h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
-															</div>
-														</div>
-													</td>
-													<td>
-														<div class="avatar-group mt-2">
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Ryan Tompson">
-																<img src="static/resources/img/template/team-1.jpg"
-																	alt="user6">
-															</a>
-															<a href="javascript:;"
-																class="avatar avatar-xs rounded-circle"
-																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Jessica Doe">
-																<img src="static/resources/img/template/team-4.jpg"
-																	alt="user7">
-															</a>
-														</div>
-													</td>
-													<td class="align-middle text-center text-sm">
-														<span class="text-xs font-weight-bold"> $2,000 </span>
-													</td>
-													<td class="align-middle">
-														<div class="progress-wrapper w-75 mx-auto">
-															<div class="progress-info">
-																<div class="progress-percentage">
-																	<span class="text-xs font-weight-bold">40%</span>
-																</div>
-															</div>
-															<div class="progress">
-																<div class="progress-bar bg-gradient-info w-40"
-																	role="progressbar" aria-valuenow="40"
-																	aria-valuemin="0" aria-valuemax="40"></div>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<!--여섯번째 영역-->
 												
 											</tbody>
 										</table>

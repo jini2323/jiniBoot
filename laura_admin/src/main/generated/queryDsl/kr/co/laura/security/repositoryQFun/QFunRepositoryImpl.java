@@ -43,14 +43,6 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	    QFundingParti qFp = QFundingParti.fundingParti;
 
 	    // fmoney의 합이 가장 높은 6개의 펀딩 게시글을 가져옵니다.
-		/*
-		 * List<Tuple> top6FundingTuples = jpaQueryFactory .select(qFun.funtitle,
-		 * qFun.funwriter, qFun.targetprice, qFp.funmoney.sum().as("totalFunMoney"))
-		 * .from(qFun) .leftJoin(qFp).on(qFun.funnum.eq(qFp.funnum_num))
-		 * .groupBy(qFun.funtitle, qFun.funwriter, qFun.targetprice)
-		 * .orderBy(qFp.funmoney.sum().desc()) .limit(6) .fetch();
-		 */
-	    
 	    List<FundingDTO> top6FundingList = jpaQueryFactory
 	            .select(Projections.constructor(
 	                FundingDTO.class,
@@ -60,10 +52,12 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	                qFp.funmoney.sum().as("totalFunMoney")))
 	            .from(qFun)
 	            .leftJoin(qFp).on(qFun.funnum.eq(qFp.funnum_num))
+	            .where(qFun.funnum.eq(qFp.funnum_num)) // 특정 funnum에 대한 필터링 추
 	            .groupBy(qFun.funtitle, qFun.funwriter, qFun.targetprice)
 	            .orderBy(qFp.funmoney.sum().desc())
 	            .limit(6)
 	            .fetch();
+	    
 	    
 
 	    return top6FundingList;
@@ -77,7 +71,6 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 
 		// FUNDING_PARTI 테이블에서 해당 펀딩 글 (funnum) 에 대한 총 펀딩 금액을 계산
 		QFundingBoard qfun = QFundingBoard.fundingBoard;
-
 		QFundingParti qfpati = QFundingParti.fundingParti;
 
 		// Long funnum

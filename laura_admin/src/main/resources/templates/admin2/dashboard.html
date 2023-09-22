@@ -261,19 +261,22 @@
 															</div>
 														</div>
 													</td>
-													<td>
+												<!--	<td>
 														<div class="avatar-group mt-2">
 															<a href="javascript:;"
 																class="avatar avatar-xs rounded-circle"
 																data-bs-toggle="tooltip" data-bs-placement="bottom"
-																title="Ryan Tompson">
+																th:title="${top6FundingList.funwriter}">
 																<img src="static/resources/img/template/team-1.jpg"
 																	alt="team1">
 															</a>
 														</div>
-													</td>
+													</td>-->
 													<td class="align-middle text-center text-sm">
 														<span class="text-xs font-weight-bold" th:text="${top6FundingList.funwriter}"></span>
+													</td>
+													<td class="align-middle text-center text-sm">
+														<span class="text-xs font-weight-bold" th:text="${top6FundingList.targetprice}"></span>
 													</td>
 													<!--<td class="align-middle">
 														<div class="progress-wrapper w-75 mx-auto">
@@ -335,16 +338,7 @@
 													</td>
 												</tr>	
 				
-				
-				
-				
-				
-				
-											
-												
-									
-												
-				<!--첫번째 영역 끝-->
+										<!--첫번째 영역 끝-->
 												
 												
 											</tbody>

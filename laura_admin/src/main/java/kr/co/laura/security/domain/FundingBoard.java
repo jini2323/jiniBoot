@@ -65,11 +65,11 @@ public class FundingBoard {
 	private String postimgn; // 펀딩 포스터이미지
 	
 	@Column(name = "sdate", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date sdate;  //펀딩 시작일
 	
 	@Column(name = "fdate", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date fdate;  //펀딩 종료일
 	
 	@Column(name = "contentimg")

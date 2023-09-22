@@ -80,6 +80,14 @@ public class FundingService {
 		    Long achievementRate = qFunRepositoryImpl.calFundingAchieveRate(funnum);
 		    System.out.println("펀딩 달성률 계산: "+achievementRate);
 		    
+		    //최신펀딩 6개 
+		    //List<FundingBoard> top6Fundings = qFunRepositoryImpl.findTop6OrderBySdateDesc();
+		   // System.out.println("최신펀딩 6개 : "+top6Fundings.get(0));
+		    
+	        
+		    
+		    
+		    
 		    return achievementRate;
 		    
 	 }

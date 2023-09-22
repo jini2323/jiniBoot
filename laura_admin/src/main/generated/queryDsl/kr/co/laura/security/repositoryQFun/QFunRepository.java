@@ -6,4 +6,8 @@ import kr.co.laura.security.domain.FundingBoard;
 
 public interface QFunRepository extends JpaRepository<FundingBoard, Long>, QFunRepositoryCustom {
 
+	
+	
+	
+	
 }

@@ -21,5 +21,6 @@ public interface FundingRepository extends JpaRepository<FundingBoard, Long>{
 	@Query(value = "SELECT COUNT(*) FROM FBOARD WHERE TRUNC(sdate) = TRUNC(SYSDATE)", nativeQuery = true)
 	Long countTodayOpenFundings();
 	
+	
 
 }

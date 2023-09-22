@@ -32,7 +32,7 @@ dependencies {
 	
 
 	 // Apache Commons Lang3 추가
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    //implementation 'org.apache.commons:commons-lang3:3.12.0'
 	
 	//타임리프
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -45,9 +45,9 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test' //시프링 시큐리티를 테스트하기 위한 의존성 추가
 	
 	//토큰 로그인 
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+	//implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+   // runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+   // runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
     //implementation 'javax.xml.bind:jaxb-api:2.3.1' //xml문서와 java객체간 매핑 자동화
 	
 	//스프링 어드민

@@ -87,6 +87,13 @@ public class MainController {
 		Long totalFunPatiMoney = funService.totalFunPati();
 		model.addAttribute("totalFunPatiMoney",totalFunPatiMoney);
 		
+		
+		//대쉬보드 11. 펀딩 달성률 계산
+		///펀딩 금액 달성률 테스트  펀딩번호: 2 , 펀딩 참여번호 3
+		Long achievementRate = funService.achievementRate(2L);
+		model.addAttribute("achievementRate",achievementRate);
+		
+		
 		return "admin2/dashboard";
 	}
 	

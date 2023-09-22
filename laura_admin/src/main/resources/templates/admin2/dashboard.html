@@ -250,7 +250,7 @@
 												</tr>
 												</thead>
 												<tbody>
-										<!--첫번째 영역-->		
+										<!--펀딩 테이블 반복 영역-->		
 											<!--	<tr th:each="top6FundingList : ${top6FundingList}">-->
 												<tr th:each="funding, status : ${top6FundingList}">
 													<td>
@@ -276,16 +276,22 @@
 														<span class="text-xs font-weight-bold" th:text="${funding.totalFunMoney}"></span>
 													</td>
 													
-													<td class="align-middle text-center text-sm">
-														<span class="text-xs font-weight-bold" th:text="${achievementRates[status.index]}"></span>
-													</td>
-																					
-													</td>
-												</tr>	
-				
-										<!--첫번째 영역 끝-->
-												
-												
+									<td class="align-middle">
+									    <div class="progress-wrapper w-75 mx-auto">
+									        <div class="progress-info">
+									            <div class="progress-percentage">
+									                <span class="text-xs font-weight-bold" 
+									                      th:text="${achievementRates[status.index] + '%'}"></span>
+									            </div>
+									        </div>
+									        <div class="progress">
+									            <div class="progress-bar bg-gradient-info" role="progressbar"
+									                th:style="'width: ' + (${achievementRates[status.index]} > 100 ? '100%' : achievementRates[status.index] + '%')"></div>
+									        </div>
+									    </div>
+									</td>
+							    </tr>	
+						<!--펀딩 테이블 반복 영역 끝-->	
 											</tbody>
 										</table>
 									</div>

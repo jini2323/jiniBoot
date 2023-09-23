@@ -1,5 +1,9 @@
 package kr.co.laura.security.repositoryQMem;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,18 +24,40 @@ public class QMemRepositoryImpl implements QMemRepositoryCustom {
 	private final JPAQueryFactory jpaQueryFactory;
 	
 	
+	// 시간 정보를 00:00:00으로 설정하는 메서드
+	private Date setTimeToMidnight(Date date) {
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.setTime(date);
+	    calendar.set(Calendar.HOUR_OF_DAY, 0);
+	    calendar.set(Calendar.MINUTE, 0);
+	    calendar.set(Calendar.SECOND, 0);
+	    calendar.set(Calendar.MILLISECOND, 0);
+	    return calendar.getTime();
+	}
+	
+	
+	//지난주 새 가입 회원 수 
 	@Override
 	public List<Long> getLastWeekNewMem(Date startDate, Date endDate) {
 		
-		QMem qmem = QMem.mem;
+	    QMem qmem = QMem.mem;
+
+	    // startDate와 endDate를 java.sql.Timestamp로 변환
+	    java.sql.Timestamp sqlStartDate = new java.sql.Timestamp(startDate.getTime());
+	    java.sql.Timestamp sqlEndDate = new java.sql.Timestamp(endDate.getTime());
+	    
+	    return jpaQueryFactory
+	            .select(qmem.mdate.count())
+	            .from(qmem)
+	            .where(qmem.mdate.between(sqlStartDate, sqlEndDate))
+	            .groupBy(qmem.mdate)
+	            .fetch();
 		
-		return jpaQueryFactory
-				.select(qmem.mdate.count())
-                .from(qmem)
-                .where(qmem.mdate.between(startDate, endDate))
-                .groupBy(qmem.mdate)
-                .fetch();
 	}
+	
+	
+	
+	
 
 	//새로 인증한 회원 목록
 	@Override

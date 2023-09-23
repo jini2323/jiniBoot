@@ -23,6 +23,4 @@ public interface MemberRepository extends JpaRepository<Mem, Long> {
 	Long countBy();
 	
 	//주간 새 회원 수는 쿼리 dsl로 
-
-	 
 }

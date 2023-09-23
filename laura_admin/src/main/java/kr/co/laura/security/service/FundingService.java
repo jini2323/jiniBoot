@@ -62,7 +62,12 @@ public class FundingService {
         Date startDate = java.sql.Date.valueOf(previousWeekStart);
         Date endDate = java.sql.Date.valueOf(previousWeekEnd);
         
-        return qfunRepository.getLastWeekNewFunding(startDate, endDate);
+        System.out.println("펀딩서비스-지난수 오픈 펀딩:start date: "+startDate);
+        System.out.println("펀딩서비스-지난수 오픈 펀딩:end date: "+endDate);
+        
+        List<Long> countLastweekOpenfundings = qFunRepositoryImpl.getLastWeekNewFunding(startDate, endDate);
+        
+        return countLastweekOpenfundings;
         
     }
 	
@@ -87,27 +92,14 @@ public class FundingService {
 	
 	
 	 public List<Long> top6dAchieveRates() { //Long funnum
-		 // 펀딩 금액 달성률 계산
-		 	//Long funnum = 0L;
-		  //Long achievementRate = qFunRepositoryImpl.calFundingAchieveRates();
+		 //1 펀딩 모금액이 가장 높은순 6개 가져오기
 		 List<FundingDTO> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();
+		 
+		 //그 6개의 펀딩의 달성률을 계산 
 		 List<Long> achievementRates = qFunRepositoryImpl.calFundingAchieveRates(top6FundingList);
 		 
 		  System.out.println("펀딩 달성률 계산: "+achievementRates.get(0));
-		
-		// fmoney의 합이 가장 높은 6개의 펀딩 게시글 가져오기
-		// List<FundingBoard> top6FundingList = qFunRepositoryImpl.showTop6FundingsByFunMoney();    
-		 
-		    //최신펀딩 6개 
-		    //List<FundingBoard> top6Fundings = qFunRepositoryImpl.findTop6OrderBySdateDesc();
-		   // System.out.println("최신펀딩 6개 : "+top6Fundings.get(0));
-		// List<Tuple> top6FundingTuples = qFunRepositoryImpl.showTop6FundingsByFunMoney();
-	        
-		    
 		    return achievementRates;
-		    
-		    
-		    
 	 }
 	
 	

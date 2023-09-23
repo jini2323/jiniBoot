@@ -22,8 +22,6 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 
 	private final JPAQueryFactory jpaQueryFactory;
 
-	// private static List<FundingBoard> funNew6Nums = new ArrayList<>();
-
 	// 지난주 새로 오픈한 펀딩 수
 	@Override
 	public List<Long> getLastWeekNewFunding(Date startDate, Date endDate) {
@@ -31,9 +29,9 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 		return jpaQueryFactory.select(qfun.sdate.count()).from(qfun)
 				.where(qfun.sdate.between(startDate, endDate))
 				.groupBy(qfun.sdate).fetch();
+		
 	}
 
-	
 	
 	//1 참여 액수가 가장 많은 상위 6개 펀딩 게시글 
 	public List<FundingDTO> showTop6FundingsByFunMoney() {
@@ -56,8 +54,6 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	            .orderBy(qFp.funmoney.sum().desc())
 	            .limit(6)
 	            .fetch();
-	    
-	    
 
 	    return top6FundingList;
 	    

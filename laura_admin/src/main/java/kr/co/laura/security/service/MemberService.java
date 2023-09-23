@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.laura.security.domain.Mem;
+import kr.co.laura.security.dto.MemDTO;
 import kr.co.laura.security.repository.MemberRepository;
 import kr.co.laura.security.repositoryQMem.QMemRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +52,12 @@ public class MemberService {
 	public Long totalMem() {
 		Long totalMem = memRepository.countBy();
 		return totalMem;
+	}
+	
+	//인증된 새 회원수 6명 리스트
+	public List<MemDTO> getNewConfirmedMems(){
+		List<MemDTO> newConfirmedMems = qmemRepository.getNewConfirmed();
+		return newConfirmedMems;
 	}
 	
 	

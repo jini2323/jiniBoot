@@ -16,6 +16,7 @@ import kr.co.laura.security.domain.FundingBoard;
 import kr.co.laura.security.domain.QFundingBoard;
 import kr.co.laura.security.domain.Visit;
 import kr.co.laura.security.dto.FundingDTO;
+import kr.co.laura.security.dto.MemDTO;
 import kr.co.laura.security.service.FundingService;
 import kr.co.laura.security.service.MemberService;
 import kr.co.laura.security.service.VisitService;
@@ -67,10 +68,9 @@ public class MainController {
 		//대쉬보드 5 지난수 새 회원 수 
 		List<Long> lastWeekNewMem = memService.lastWeekNewMem();
 		model.addAttribute("lastWeekNewMem",lastWeekNewMem);
-		
+		System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
 		for (Object e : lastWeekNewMem) {
-			System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
-		    System.out.println("일주일 전 새 회원수 for each 문 e : "+e);
+		    System.out.println("일주일 전 새 회원수 : "+e);
 		}
 		
 		
@@ -83,11 +83,29 @@ public class MainController {
 		model.addAttribute("todayOpenfundings",todayOpenfundings);
 		
 		
-		//대쉬보드 8. 지난 주 새로 오픈(작성x)한 펀딩 수
-		List<Long> lasgWeekNewFundings = funService.lastWeekNewFundings();
-		model.addAttribute("lasgWeekNewFundings",lasgWeekNewFundings);
 		
-		//대쉬보드 9 . 오늘 펀딩 참여 총 금액
+		//대쉬보드 8. 지난 주 새로 오픈(작성x)한 펀딩 수 검정색차트
+		List<Long> lasgWeekOpenFundings = funService.lastWeekNewFundings();
+		
+		// NULL 값을 0으로 대체
+		for (int i = 0; i < lasgWeekOpenFundings.size(); i++) {
+		    if (lasgWeekOpenFundings.get(i) == null) {
+		        lasgWeekOpenFundings.set(i, 0L); // NULL을 0으로 대체
+		    }
+		}
+		
+		model.addAttribute("lasgWeekOpenFundings",lasgWeekOpenFundings);
+		
+		for (Long count : lasgWeekOpenFundings) {
+		    System.out.println("지난 주 새로 오픈한 펀딩 수: " + count);
+		}
+		
+		
+		
+		
+		
+		
+		//대쉬보드 9 . 오늘 펀딩 참여 총 금액  파란거 끝에 
 		Long totalTodayMoney = funService.todayTotalFunPati();
 		model.addAttribute("totalTodayMoney",totalTodayMoney);
 		
@@ -107,6 +125,19 @@ public class MainController {
 		System.out.println("컨트롤러/ 달성률:"+achievementRates);
 		
 		
+		//대쉬보드 13. 인증된 새회원 최신순 6명 업데이트
+		List<MemDTO> newConfirmedMems = memService.getNewConfirmedMems();
+		model.addAttribute("newConfirmedMems",newConfirmedMems);
+		
+		
+		for (MemDTO memDTO : newConfirmedMems) {
+		    System.out.println("Nickname: " + memDTO.getNickname());
+		    System.out.println("Name: " + memDTO.getName());
+		    System.out.println("Ardate: " + memDTO.getArdate());
+		    System.out.println("Arprofile: " + memDTO.getArprofile());
+		    System.out.println("Arstatus: " + memDTO.getArstatus());
+		    System.out.println("-------------------------------");
+		}
 		
 		return "admin2/dashboard";
 	}

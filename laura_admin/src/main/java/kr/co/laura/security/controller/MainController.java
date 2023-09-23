@@ -39,23 +39,25 @@ public class MainController {
 	public String dashboard(Model model) {
 		
 		//대쉬보드 1. 오늘의 방문자 수 (비회원 포함 세션 ㄴㄴ) 
-		Optional<Visit> todayCount =  visitService.todayCount();
+		Long todayCount =  visitService.todayCount();
+		//model.addAttribute("todayCount", todayCount);
 		model.addAttribute("todayCount", todayCount);
 		
 		
 		//대쉬보드 2. 저번주 방문자 수 (비회원 포함 세션 ㄴㄴ) 
-		List<Visit> lastWeekCount = visitService.weekCount();
-		model.addAttribute("lastWeekCount",lastWeekCount);
+		List<Long> lastWeekCounts = visitService.weekCount();
+		model.addAttribute("lastWeekCounts",lastWeekCounts);
 		
-		for (Visit visit : lastWeekCount) {
-		    System.out.println("날짜: " + visit.getVisitDate() + ", 방문자 수: " + visit.getCountNum());
-		}
-		
+		  for (Long count : lastWeekCounts) {
+		        System.out.println("메인커트롤러/ 지난주 방문자 수: " + count);
+		    }
 		
 		//대쉬보드 3. 오늘 새 회원 수
 		Long todayNewMem = memService.todayNewMem();
 		model.addAttribute("todayNewMem",todayNewMem);
 		System.out.println("메인컨트롤러 오늘 새 회원수 :"+todayNewMem);
+		
+		
 		
 		
 		//대쉬보드 4. 총 회원수

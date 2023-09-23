@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.laura.security.domain.Visit;
@@ -13,11 +15,14 @@ import kr.co.laura.security.domain.Visit;
 public interface VisitRepository extends JpaRepository<Visit, Date>{
 	
 	//오늘 방문자 수 
-	Optional<Visit> findByVisitDate(Date visitDate);
-
+	//Optional<Visit> findByVisitDate(Date visitDate);
+	// 오늘 방문자 수
+	//Visit findByVisitDate(Date visitDate);
+	Long countByVisitDate(Date today);
+	
 	
 	//저번주 방문자 수(주간 
-	List<Visit> findByVisitDateBetween(Date startDate,Date endDate);
-
+	//List<Visit> findByVisitDateBetween(Date startDate,Date endDate);
+    List<Long> countByVisitDateBetween(Date startDate, Date endDate);
 	
 }

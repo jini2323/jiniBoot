@@ -19,16 +19,25 @@ public class VisitService {
 	private final VisitRepository visitRepository;
 	
 	//오늘 하루 방문자 수 구하기 
-	public Optional<Visit> todayCount(){
+	
+	public Long todayCount(){
 		Date today = new Date();
 		//Optional<Visit> findOne = visitRepository.findOne(null);
-		return visitRepository.findByVisitDate(today);
-	}
+		//return visitRepository.findByVisitDate(today);
+		//return visitRepository.findByVisitDate(today);
+		return visitRepository.countByVisitDate(today);
+	} 
 	
-	
+	/*
+	 * public Optional<Visit> todayCount(){ Date today = new Date(); Optional<Visit>
+	 * visit = visitRepository.findByVisitDate(today);
+	 * 
+	 * if (visit.isPresent()) { return visit; } else { // 데이터가 없을 때 원하는 처리를 할 수 있음
+	 * return Optional.empty(); // 또는 다른 기본값 설정 } }
+	 */
 	
 	//저번주  방문자 수 구하기
-	public List<Visit> weekCount(){
+	public List<Long> weekCount(){
 			
 		LocalDate today = LocalDate.now();
 		// 현재 날짜의 요일을 가져옴 (1: 월요일, 2: 화요일, ...)
@@ -48,7 +57,7 @@ public class VisitService {
 	      System.out.println("서비스previousWeekStart : "+previousWeekStart);
 	      System.out.println("서비스 previousWeekEnd: "+previousWeekEnd);
 	      
-	      return visitRepository.findByVisitDateBetween(startDate, endDate);
+	      return visitRepository.countByVisitDateBetween(startDate, endDate);
 		
 	}
 	

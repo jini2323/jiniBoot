@@ -28,13 +28,14 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	@Override
 	public List<Long> getLastWeekNewFunding(Date startDate, Date endDate) {
 		QFundingBoard qfun = QFundingBoard.fundingBoard;
-		return jpaQueryFactory.select(qfun.sdate.count()).from(qfun).where(qfun.sdate.between(startDate, endDate))
+		return jpaQueryFactory.select(qfun.sdate.count()).from(qfun)
+				.where(qfun.sdate.between(startDate, endDate))
 				.groupBy(qfun.sdate).fetch();
 	}
 
 	
 	
-	
+	//1 참여 액수가 가장 많은 상위 6개 펀딩 게시글 
 	public List<FundingDTO> showTop6FundingsByFunMoney() {
 	    QFundingBoard qFun = QFundingBoard.fundingBoard;
 	    QFundingParti qFp = QFundingParti.fundingParti;
@@ -63,7 +64,7 @@ public class QFunRepositoryImpl implements QFunRepositoryCustom {
 	}
 	
 	
-	//3
+	//3 펀딩 목표 달성률 계산 마무리 
 	public List<Long> calFundingAchieveRates(List<FundingDTO> top6FundingList) {
 	    List<Long> achievementRates = new ArrayList<>();
 	    for (FundingDTO dto : top6FundingList) {

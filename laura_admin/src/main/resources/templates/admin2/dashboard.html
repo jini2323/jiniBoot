@@ -37,21 +37,6 @@
 									</div>
 									
 									
-								<!--<div class="text-end pt-1">
-								    <p class="text-sm mb-0 text-capitalize">Today 방문자 수</p>
-								    <h4 class="mb-0" th:text="${todayCount.isPresent() ? todayCount.get().countNum : 0}">0</h4>
-								</div>-->
-														
-									<!--	<div class="text-end pt-1">
-											    <p class="text-sm mb-0 text-capitalize">Today 방문자 수</p>
-											    <h4 class="mb-0" th:if="${todayCount.isPresent()}" th:text="${todayCount.get().countNum}"></h4>
-											    <h4 class="mb-0" th:unless="${todayCount.isPresent()}">0</h4>
-											</div>-->
-								<!--	<div class="text-end pt-1">
-										    <p class="text-sm mb-0 text-capitalize">Today 방문자 수</p>
-										    <h4 class="mb-0" th:if="${todayCount != null}" th:text="${todayCount.get().countNum}"></h4>
-										    <h4 class="mb-0" th:unless="${todayCount != null}">0</h4>
-										</div>	-->									
 								<div class="text-end pt-1">
 								    <p class="text-sm mb-0 text-capitalize">Today 방문자 수</p>
 								    <h4 class="mb-0" th:if="${todayCount != null}" th:text="${todayCount}"></h4>
@@ -62,9 +47,6 @@
 								<hr class="dark horizontal my-0">
 								<div class="card-footer p-3">
 									
-								<!--	<p class="mb-0">Total <span class="text-success text-sm font-weight-bolder" th:text="${todayCount.get().countNum}">
-											</span> 명</p>-->
-								<!--<p class="mb-0">Total <span class="text-success text-sm font-weight-bolder" th:text="${todayCount != null ? todayCount.get().countNum : 0}"></span> 명</p>			-->
 										<p class="mb-0">Total <span class="text-success text-sm font-weight-bolder" th:text="${todayCount != null ? todayCount : 0}"></span> 명</p>	
 								</div>
 							</div>
@@ -82,13 +64,7 @@
 							    <p class="text-sm mb-0 text-capitalize">Today 가입한 회원 수</p>
 							    <h4 class="mb-0" th:text="${todayNewMem != null ? todayNewMem : 0}">0</h4>
 								</div>
-						<!--		<div class="text-end pt-1">
-						    <p class="text-sm mb-0 text-capitalize">Today new Funding!</p>
-					    <h4 class="mb-0" th:if="${todayOpenfundings.isPresent()}" th:text="${todayOpenfundings.get()}"></h4>
-					    <h4 class="mb-0" th:unless="${todayOpenfundings.isPresent()}">0</h4>
-					</div>						
-											-->		
-								</div>
+							</div>
 								<hr class="dark horizontal my-0">
 								<div class="card-footer p-3">
 									<p class="mb-0">Total 회원 수<span class="text-danger text-sm font-weight-bolder" th:text="${totalMem}">
@@ -105,21 +81,19 @@
 										class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
 										<i class="material-icons opacity-10">weekend</i>
 									</div>
-									
-									<!--<div class="text-end pt-1">
-										<p class="text-sm mb-0 text-capitalize">Today new Funding!</p>
-										<h4 class="mb-0" th:text="${todayOpenfundings}"></h4>
-									</div>
-									-->
-									<div class="text-end pt-1">
-									    <p class="text-sm mb-0 text-capitalize">Today new Funding!</p>
-									    <h4 class="mb-0" th:text="${todayOpenfundings != null ? todayOpenfundings : 0}">0</h4>
-									</div>
-								</div>
-						c
+						<div class="text-end pt-1">
+						    <p class="text-sm mb-0 text-capitalize">Today new Funding!</p>
+						    <h4 class="mb-0" th:if="${todayOpenfundings != null}" th:text="${todayOpenfundings}">0</h4>
+						    <h4 class="mb-0" th:if="${todayOpenfundings == null}" th:text="0"></h4>
 						</div>
-
-
+					</div>
+							<hr class="dark horizontal my-0">
+								<div class="card-footer p-3">
+									<p class="mb-0">Total 펀딩 수 <span class="text-success text-sm font-weight-bolder" th:text="${totalMem}">
+										</span> 개</p>
+								</div>
+				</div>
+			</div>
 
 						<div class="col-xl-3 col-sm-6">
 							<div class="card">
@@ -141,9 +115,11 @@
 							</div>
 						</div>
 					</div>
+					
+					
+					
+					
 					<div class="row mt-4">
-
-
 						<!--비회원 저번주 방문자 수 그래프-->
 						<div class="col-lg-4 col-md-6 mt-4 mb-4">
 							<div class="card z-index-2 ">
@@ -216,8 +192,6 @@
 								</div>
 							</div>
 						</div>
-
-
 					</div>
 					<div class="row mb-4">
 						<div class="col-lg-8 col-md-6 mb-md-0 mb-4">
@@ -513,9 +487,9 @@
 	<script src="static/resources/js/template/plugins/smooth-scrollbar.min.js"></script>
 	<script src="static/resources/js/template/plugins/chartjs.min.js"></script>
 
+
 	<!-- HTML 코드 내에서 스크립트 영역으로 타임리프 변수를 전달 -->
 	<script th:inline="javascript">
-		// 오늘의 방문자 수
 
 		// 오늘의 방문자 수
 			var todayCountData = /*[[ ${todayCount} ]]*/ null;
@@ -525,11 +499,7 @@
 
 		// 저번주 방문자 수
 		var lastWeekCountData = /*[[ ${lastWeekCounts} ]]*/[];
-
-		// 데이터를 풀어서 숫자 배열로 변환
-		lastWeekCountData = lastWeekCountData.map(function (visit) {
-			return visit.countNum;
-		});
+		
 
 		// 데이터를 역순으로 정렬
 		lastWeekCountData.reverse();
@@ -725,11 +695,8 @@
 			},
 		});
 		}
-		// 페이지 로드 시 차트 초기화
-		//initializeChart2(lastWeekNewMem);
-		
 	</script>
-	<!--2번째 차트 영역--> 
+	<!--2번째 차트 영역 끝--> 
 	
 	
 	

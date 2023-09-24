@@ -28,6 +28,10 @@ public class MemController {
 		List<Mem> memList = memService.showMemList();
 		model.addAttribute("memList",memList);
 		
+		
+		
+		
+		
 		return "member/memList";
 	}
 	

@@ -86,9 +86,6 @@ public class MainController {
 		//대쉬보드 8. 지난 주 새로 오픈(작성x)한 펀딩 수 검정색차트
 		List<FunCountDTO> lasgWeekOpenFundings = funService.lastWeekNewFundings();
 		
-		// NULL 값을 0으로 대체
-		
-		
 		model.addAttribute("lasgWeekOpenFundings",lasgWeekOpenFundings);
 		System.out.println("컨트롤러/지난주 새오픈 펀딩 수 크기: "+lasgWeekOpenFundings.size());
 		for (FunCountDTO count : lasgWeekOpenFundings) {
@@ -96,11 +93,6 @@ public class MainController {
 		    System.out.println("컨트롤러/지난주 새 오픈한 펀딩수: " + count.getCountNewOpenFunding());
 		}
 	
-	
-		
-		
-		
-		
 		//대쉬보드 9 . 오늘 펀딩 참여 총 금액  파란거 끝에 
 		Long totalTodayMoney = funService.todayTotalFunPati();
 		model.addAttribute("totalTodayMoney",totalTodayMoney);
@@ -125,7 +117,7 @@ public class MainController {
 		List<MemDTO> newConfirmedMems = memService.getNewConfirmedMems();
 		model.addAttribute("newConfirmedMems",newConfirmedMems);
 		
-		
+		/*
 		for (MemDTO memDTO : newConfirmedMems) {
 		    System.out.println("Nickname: " + memDTO.getNickname());
 		    System.out.println("Name: " + memDTO.getName());
@@ -134,7 +126,7 @@ public class MainController {
 		    System.out.println("Arstatus: " + memDTO.getArstatus());
 		    System.out.println("-------------------------------");
 		}
-		
+		*/
 		return "admin2/dashboard";
 	}
 	

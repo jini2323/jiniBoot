@@ -38,32 +38,10 @@ public class MemberService {
 		return todayNewMem;
 	}
 	
-	
-	// 최신 7일~ 어제까지의 날짜
-    public Date calculateStartDateForLast7Days() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -7); // 7일 전의 날짜를 계산
-        return calendar.getTime();
-    }
-
-    public Date calculateEndDateForYesterday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -1); // 어제의 날짜를 계산
-        return calendar.getTime();
-    }
 	    
-	    
-    //지난 주  새 회원 수 차트
+    //대쉬보드 5 지난수 새 회원 수 
     public List<MemCountDTO> lastWeekNewMem() {
-        LocalDate today = LocalDate.now();
-        int currentDayOfWeek = today.getDayOfWeek().getValue();
-        LocalDate previousWeekStart = today.minusDays(currentDayOfWeek).minusWeeks(1).plusDays(1);
-        LocalDate previousWeekEnd = today.minusDays(currentDayOfWeek);
-        Date startDate = java.sql.Date.valueOf(previousWeekStart);
-        Date endDate = java.sql.Date.valueOf(previousWeekEnd);
-        
-       // return qmemRepositoryImpl.getLastWeekNewMem6(startDate, endDate);
-        return qmemRepositoryImpl.getLastWeekNewMem1();
+        return qmemRepositoryImpl.getLastWeekNewMem();
     }
 	
     

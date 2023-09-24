@@ -22,29 +22,6 @@ public interface MemberRepository extends JpaRepository<Mem, Long> {
 	@Query(value = "SELECT COUNT(*) FROM Mem WHERE TRUNC(MDATE) = TRUNC(SYSDATE)", nativeQuery = true)
 	Long countTodayNewMembers();
 	
-	
-	// 주간 새 회원 수 조회
-    @Query(value ="SELECT *\r\n"
-    		+ "FROM (\r\n"
-    		+ "    SELECT COUNT(mdate) AS count_mdate, TO_CHAR(mdate, 'YYYY/MM/DD') AS mdate\r\n"
-    		+ "    FROM MEM\r\n"
-    		+ "    WHERE TO_CHAR(mdate, 'YYYY/MM/DD') BETWEEN TO_CHAR(TRUNC(SYSDATE) - 7) AND TO_CHAR(TRUNC(SYSDATE) - 1)\r\n"
-    		+ "    GROUP BY TO_CHAR(mdate, 'YYYY/MM/DD')\r\n"
-    		+ "    ORDER BY mdate DESC\r\n"
-    		+ ")\r\n"
-    		+ "WHERE ROWNUM <= 7", nativeQuery = true)
-    List<MemCountDTO> countWeeklyNewMembers();
-	
-    
-    
-    @Query(value = "SELECT TO_CHAR(mdate, 'YYYY/MM/DD') AS mdate, COUNT(*) AS count_mdate " +
-            "FROM Mem " +
-            "WHERE mdate BETWEEN :startDate AND :endDate " +
-            "GROUP BY TO_CHAR(mdate, 'YYYY/MM/DD') " +
-            "ORDER BY TO_CHAR(mdate, 'YYYY/MM/DD') DESC")
-    List<Object[]> countWeeklyNewMembers2(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-	
-    
     
 	// 총 회원수
 	Long countBy();

@@ -575,26 +575,45 @@
 
 <!--2번째 녹색 차트 영역--> 
 <script th:inline="javascript">
-	
-
-		// 저번주 새 회원 수
-		var lastWeekNewMem = /*[[ ${lastWeekNewMem} ]]*/ [];
 		
-		initializeChart2(lastWeekNewMem);
+		// 날짜 데이터 매핑
+	    var counts2 = []; //새 회원수 
+	    var labels2 = []; //mdata
+		// 저번주 새 회원 수
+		var dateLabels2 = /*[[ ${lastWeekNewMem} ]]*/ [];
+		//위에꺼 DTO 리스트 형 
+
+
+		dateLabels2.forEach(function (data) {
+		    // 가입수가 null이면 0으로 처리
+		    if (data.countNewMems === null) {
+		        counts2.push(0);
+		    } else {
+		        counts2.push(data.countNewMems);
+		    }
+		    
+		    var date = new Date(data.mdate);
+		    var formattedDate = (date.getMonth() + 1) + '.' + date.getDate(); // 월은 0부터 시작하므로 +1
+		    labels2.push(formattedDate); // 포맷된 날짜를 가입날짜로 할당
+		});
+
+
 
 		// 데이터를 역순으로 정렬
-		lastWeekCountData.reverse();
+		//lastWeekCountData.reverse();
 
 		// 먼저 확인하기 위해 값을 콘솔에 출력
-		console.log("lastWeekNewMem: ", lastWeekNewMem);
-	
-	
-		function initializeChart2(data) {
+		console.log("dateLabels2: ", dateLabels2);
+		console.log("labels2: ", labels2);
+		console.log("counts2: ", counts2);
+		
+		
+		function initializeChart2() {
 		var ctx2 = document.getElementById("chart-line").getContext("2d");
 		new Chart(ctx2, {
 			type: "line",
 			data: {
-				labels: ["M", "T", "W", "T", "F", "Sa", "Su"],
+				labels: labels2, //가입날짜 
 				datasets: [{
 					label: "Mobile apps",
 					tension: 0,
@@ -607,7 +626,7 @@
 					borderWidth: 4,
 					backgroundColor: "transparent",
 					fill: true,
-					data: data, // 데이터를 여기에 할당
+					data: counts2, // 새 회원수 데이터
 					maxBarThickness: 6
 
 				}],
@@ -672,6 +691,7 @@
 			},
 		});
 		}
+	initializeChart2();
 	</script>
 	<!--2번째 차트 영역 끝--> 
 	
@@ -679,29 +699,41 @@
 	<!--3번째 검정 차트 영역--> 	
 	<script th:inline="javascript">
 
-		// 저번주 새로 오픈한 펀딩 수 
-		var lasgWeekOpenFundings = /*[[ ${lasgWeekOpenFundings} ]]*/ [];
-		
-		initializeChart3(lasgWeekOpenFundings);
+		// 날짜 데이터 매핑
+	    var counts3 = []; //새 오픈한 펀딩 수 
+	    var labels3 = []; //sdate 오픈한 날짜 
+		// 저번주 새 회원 수
+		var dateLabels3 = /*[[ ${lasgWeekOpenFundings} ]]*/ [];
+		//위에꺼 DTO 리스트 형 
 
-		// 데이터를 역순으로 정렬
-		lasgWeekOpenFundings.reverse();
+		dateLabels3.forEach(function (data) {
+		    // 가입수가 null이면 0으로 처리
+		    if (data.countNewOpenFunding === null) {
+		        counts3.push(0);
+		    } else {
+		        counts3.push(data.countNewOpenFunding);
+		    }
+		    
+		    var date = new Date(data.sdate);
+		    var formattedDate = (date.getMonth() + 1) + '.' + date.getDate(); // 월은 0부터 시작하므로 +1
+		    labels3.push(formattedDate); // 포맷된 날짜를 가입날짜로 할당
+		});
+
 		// 먼저 확인하기 위해 값을 콘솔에 출력
-		console.log("lasgWeekOpenFundings: ", lasgWeekOpenFundings);
-		
-	function initializeChart3(data3) {	
-		
-		    // 데이터 배열에서 NULL을 0으로 변환
-		    var transformedData = data3.map(function(value) {
-		        return value === null ? 0 : value;
-		    });
+		console.log("dateLabels3: ", dateLabels3);
+		console.log("labels3: ", labels3);
+		console.log("counts3: ", counts3);
+
+
+
+	function initializeChart3() {	
 		
 		var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
 
 		new Chart(ctx3, {
 			type: "line",
 			data: {
-				labels: ["M", "T", "W", "T", "F", "Sa", "Su"],
+				labels:labels3, //["M", "T", "W", "T", "F", "Sa", "Su"],
 				datasets: [{
 					label: "Mobile apps",
 					tension: 0,
@@ -713,7 +745,7 @@
 					borderWidth: 4,
 					backgroundColor: "transparent",
 					fill: true,
-					data: data3,    //데이터를 여기에 할당
+					data: counts3,    //데이터를 여기에 할당
 					maxBarThickness: 6
 
 				}],
@@ -778,6 +810,7 @@
 			},
 		});
 		}
+	initializeChart3();	
 	</script>
 	<!--3번째 검정 차트 영역 끝--> 
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.querydsl.core.Tuple;
 
 import kr.co.laura.security.domain.FundingBoard;
+import kr.co.laura.security.dto.FunCountDTO;
 import kr.co.laura.security.dto.FundingDTO;
 import kr.co.laura.security.repository.FunPartiRepository;
 import kr.co.laura.security.repository.FundingRepository;
@@ -24,9 +25,6 @@ public class FundingService {
 	@Autowired
 	private final FundingRepository funRepository;
 
-	@Autowired
-	private final QFunRepository qfunRepository;
-	
 	@Autowired
 	private final FunPartiRepository funPatiRepository;
 	
@@ -54,21 +52,9 @@ public class FundingService {
 	
 	
 	//지난주  오픈한(작성이 아닌) 시작하는 펀딩 수 
-    public List<Long> lastWeekNewFundings() {
-        LocalDate today = LocalDate.now();
-        int currentDayOfWeek = today.getDayOfWeek().getValue();
-        LocalDate previousWeekStart = today.minusDays(currentDayOfWeek).minusWeeks(1).plusDays(1);
-        LocalDate previousWeekEnd = today.minusDays(currentDayOfWeek);
-        Date startDate = java.sql.Date.valueOf(previousWeekStart);
-        Date endDate = java.sql.Date.valueOf(previousWeekEnd);
-        
-        System.out.println("펀딩서비스-지난수 오픈 펀딩:start date: "+startDate);
-        System.out.println("펀딩서비스-지난수 오픈 펀딩:end date: "+endDate);
-        
-        List<Long> countLastweekOpenfundings = qFunRepositoryImpl.getLastWeekNewFunding(startDate, endDate);
-        
+    public List<FunCountDTO> lastWeekNewFundings() {
+        List<FunCountDTO> countLastweekOpenfundings = qFunRepositoryImpl.getLastWeekNewFunding();
         return countLastweekOpenfundings;
-        
     }
 	
     //오늘 총 펀딩 참여 금액 

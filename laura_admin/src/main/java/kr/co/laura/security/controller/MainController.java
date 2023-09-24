@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
+import kr.co.laura.security.dto.FunCountDTO;
 import kr.co.laura.security.dto.FundingDTO;
 import kr.co.laura.security.dto.MemCountDTO;
 import kr.co.laura.security.dto.MemDTO;
@@ -69,8 +69,8 @@ public class MainController {
 		
 		System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
 		for (MemCountDTO e : lastWeekNewMem) {
-		    System.out.println("컨트롤러/지난주/ 새 회원수 : "+e.getCountNewMems());
 		    System.out.println("/컨트롤러/지난주/ 새 회원 가입mdate : "+e.getMdate());
+		    System.out.println("컨트롤러/지난주/ 새 회원수 : "+e.getCountNewMems());
 		}
 		
 		
@@ -83,24 +83,20 @@ public class MainController {
 		model.addAttribute("todayOpenfundings",todayOpenfundings);
 		
 		
-		
 		//대쉬보드 8. 지난 주 새로 오픈(작성x)한 펀딩 수 검정색차트
-		List<Long> lasgWeekOpenFundings = funService.lastWeekNewFundings();
+		List<FunCountDTO> lasgWeekOpenFundings = funService.lastWeekNewFundings();
 		
 		// NULL 값을 0으로 대체
-		for (int i = 0; i < lasgWeekOpenFundings.size(); i++) {
-		    if (lasgWeekOpenFundings.get(i) == null) {
-		        lasgWeekOpenFundings.set(i, 0L); // NULL을 0으로 대체
-		    }
-		}
+		
 		
 		model.addAttribute("lasgWeekOpenFundings",lasgWeekOpenFundings);
-		
-		for (Long count : lasgWeekOpenFundings) {
-		    System.out.println("지난 주 새로 오픈한 펀딩 수: " + count);
+		System.out.println("컨트롤러/지난주 새오픈 펀딩 수 크기: "+lasgWeekOpenFundings.size());
+		for (FunCountDTO count : lasgWeekOpenFundings) {
+		    System.out.println("컨트롤러/지난주 새 오픈한 펀딩수: " + count.getSdate());
+		    System.out.println("컨트롤러/지난주 새 오픈한 펀딩수: " + count.getCountNewOpenFunding());
 		}
-		
-		
+	
+	
 		
 		
 		

@@ -14,7 +14,7 @@ public interface QFunRepositoryCustom {
 	   * QueryDSL을 사용하여 To-Do 목록 조회
 	   */
 	
-	List<Long> getLastWeekNewFunding(Date startDate,Date endDate);
+	//List<Long> getLastWeekNewFunding(Date startDate,Date endDate);
 	
 	
 

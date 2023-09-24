@@ -1,6 +1,5 @@
 package kr.co.laura.security.dto;
 
-import java.util.Date;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +20,9 @@ public class MemCountDTO {
 		this.countNewMems = countNewMems;
 		this.mdate = mdate;
 		//this.mdate = mdate;
-		System.out.println
-		("Memcount dto 생성자:"+"가입수:"+countNewMems+  
-				"mdate : "+mdate);
+		//System.out.println
+		//("Memcount dto 생성자: mdate : "+mdate
+		//		+" 가입수:"+countNewMems);
 		
 	}
 	

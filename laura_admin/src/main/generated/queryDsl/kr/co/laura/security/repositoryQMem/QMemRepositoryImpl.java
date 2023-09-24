@@ -35,6 +35,7 @@ public class QMemRepositoryImpl implements QMemRepositoryCustom {
 	    return calendar.getTime();
 	}
 	
+
 	
 	//지난주 새 가입 회원 수 
 	@Override

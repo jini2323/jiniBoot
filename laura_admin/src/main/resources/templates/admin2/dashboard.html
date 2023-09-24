@@ -446,112 +446,130 @@
 	<script src="static/resources/js/template/plugins/chartjs.min.js"></script>
 
 
-	<!-- HTML 코드 내에서 스크립트 영역으로 타임리프 변수를 전달 -->
-	<script th:inline="javascript">
+<!-- HTML 코드 내에서 스크립트 영역으로 타임리프 변수를 전달 -->
+<!--첫번째 분홍 차트 영역-->
+<script th:inline="javascript">
 
-		// 오늘의 방문자 수
-			var todayCountData = /*[[ ${todayCount} ]]*/ null;
-			if (todayCountData === null) {
-			    todayCountData = 0;
-			}
+   		 // 오늘의 방문자 수
+	   var todayCountData = /*[[ ${todayCount} ]]*/ null;
+	    if (todayCountData === null) {
+	       todayCountData = 0;
+	   }
 
-		// 저번주 방문자 수
-		var lastWeekCountData = /*[[ ${lastWeekCounts} ]]*/[];
-		
+    	// 날짜 데이터 매핑
+	    var counts = [];
+	    var labels = [];
+	    var dateLabels = /*[[${lastWeekDatesAndCount}]]*/ []; // 서버에서 받은 날짜와 방문자 수 데이터
 
-		// 데이터를 역순으로 정렬
-		lastWeekCountData.reverse();
+		dateLabels.forEach(function (data) {
+		    // 날짜를 간단한 형식으로 포맷팅 (예: "8.13")
+		    var date = new Date(data.visitDate);
+		    var formattedDate = (date.getMonth() + 1) + "." + date.getDate();
+		    
+		    // date를 라벨로 사용
+		    labels.push(formattedDate);
+		    
+		    // 데이터가 null이면 0으로 처리
+		    if (data.visitorCount === null) {
+		        counts.push(0);
+		    } else {
+		        counts.push(data.visitorCount);
+		    }
+		});
 
-		// 먼저 확인하기 위해 값을 콘솔에 출력
-		console.log("todayCountData: ", todayCountData);
-		console.log("lastWeekCountData: ", lastWeekCountData);
+    // 먼저 확인하기 위해 값을 콘솔에 출력
+ 	console.log("todayCountData: ", todayCountData);
+	console.log("dateLabels: ", dateLabels);
+	console.log("labels: ", labels);
+	console.log("counts: ", counts);
+ 
+    // 차트 초기화 함수
+    function initializeChart() {
+        var ctx = document.getElementById("chart-bars").getContext("2d");
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: labels, // 7일전 부터 어제까지의 날짜 데이터
+                datasets: [{
+                    label: "Sales",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    borderRadius: 4,
+                    borderSkipped: false,
+                    backgroundColor: "rgba(255, 255, 255, .8)",
+                    data: counts, // 방문자수 데이터 
+                    maxBarThickness: 6
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                            color: 'rgba(255, 255, 255, .2)'
+                        },
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 500,
+                            beginAtZero: true,
+                            padding: 10,
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                            color: "#fff"
+                        },
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                            color: 'rgba(255, 255, 255, .2)'
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#f8f9fa',
+                            padding: 10,
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
+            },
+        });
+    }
 
+    // 페이지 로드 시 차트 초기화
+    initializeChart();
+</script>
+<!--첫번째 분홍 차트 영역 끝-->	
 
-		// 차트 초기화 함수
-		function initializeChart(data) {
-			var ctx = document.getElementById("chart-bars").getContext("2d");
-			new Chart(ctx, {
-				type: "bar",
-				data: {
-					labels: ["M", "T", "W", "T", "F", "Sa", "Su"],
-					datasets: [{
-						label: "Sales",
-						tension: 0.4,
-						borderWidth: 0,
-						borderRadius: 4,
-						borderSkipped: false,
-						backgroundColor: "rgba(255, 255, 255, .8)",
-						data: data, // 데이터를 여기에 할당
-						maxBarThickness: 6
-					}],
-				},
-				options: {
-					responsive: true,
-					maintainAspectRatio: false,
-					plugins: {
-						legend: {
-							display: false,
-						}
-					},
-					interaction: {
-						intersect: false,
-						mode: 'index',
-					},
-					scales: {
-						y: {
-							grid: {
-								drawBorder: false,
-								display: true,
-								drawOnChartArea: true,
-								drawTicks: false,
-								borderDash: [5, 5],
-								color: 'rgba(255, 255, 255, .2)'
-							},
-							ticks: {
-								suggestedMin: 0,
-								suggestedMax: 500,
-								beginAtZero: true,
-								padding: 10,
-								font: {
-									size: 14,
-									weight: 300,
-									family: "Roboto",
-									style: 'normal',
-									lineHeight: 2
-								},
-								color: "#fff"
-							},
-						},
-						x: {
-							grid: {
-								drawBorder: false,
-								display: true,
-								drawOnChartArea: true,
-								drawTicks: false,
-								borderDash: [5, 5],
-								color: 'rgba(255, 255, 255, .2)'
-							},
-							ticks: {
-								display: true,
-								color: '#f8f9fa',
-								padding: 10,
-								font: {
-									size: 14,
-									weight: 300,
-									family: "Roboto",
-									style: 'normal',
-									lineHeight: 2
-								},
-							}
-						},
-					},
-				},
-			});
-		}
-
-		// 페이지 로드 시 차트 초기화
-		initializeChart(lastWeekCountData);
-	</script>
 
 
 <!--2번째 차트 영역--> 

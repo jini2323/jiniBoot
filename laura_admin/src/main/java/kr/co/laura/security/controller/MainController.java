@@ -1,22 +1,16 @@
 package kr.co.laura.security.controller;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.querydsl.core.Tuple;
 
-import kr.co.laura.security.domain.FundingBoard;
-import kr.co.laura.security.domain.QFundingBoard;
-import kr.co.laura.security.domain.Visit;
 import kr.co.laura.security.dto.FundingDTO;
 import kr.co.laura.security.dto.MemDTO;
+import kr.co.laura.security.dto.VisitDTO;
 import kr.co.laura.security.service.FundingService;
 import kr.co.laura.security.service.MemberService;
 import kr.co.laura.security.service.VisitService;
@@ -39,20 +33,24 @@ public class MainController {
 	@GetMapping("/dashboard")
 	public String dashboard(Model model) {
 		
-		//대쉬보드 1. 오늘의 방문자 수 (비회원 포함 세션 ㄴㄴ) 
-		Long todayCount =  visitService.todayCount();
+		//대쉬보드 1. 오늘의 방문자 수 (비회원 포함 세션 ㄴ) 
+		VisitDTO todayCountAndDate =  visitService.todayCount();
+		Long todayCount = todayCountAndDate.getVisitorCount();
+		if (todayCount == null) {
+			todayCount = 0L;
+		}
 		model.addAttribute("todayCount", todayCount);
+		//System.out.println("컨트롤러/오늘의 방문자 수: "+todayCount);
 		
 		
-		//대쉬보드 2. 저번주 방문자 수 (비회원 포함 세션 ㄴㄴ) 
-		List<Long> lastWeekCounts = visitService.weekCount();
-		model.addAttribute("lastWeekCounts",lastWeekCounts);
+		//대쉬보드 2.분홍차트 7일전-어제까지의 날까 +방문자 수 2개 같이 구하기 (세션 아니고)
+		List<VisitDTO> lastWeekDatesAndCount = visitService.showLastWeekCountVisitWithDate();
+		model.addAttribute("lastWeekDatesAndCount", lastWeekDatesAndCount);
 		
-		  for (Long count : lastWeekCounts) {
-		        System.out.println("메인컨트롤러/ 지난주 방문자 수 : " + count);
-		    }
-		System.out.println("메인컨트롤러 지난주 방문수 크기:"+lastWeekCounts.size());
-		  
+		for (VisitDTO count : lastWeekDatesAndCount) {
+	        System.out.println("메인컨트롤러/ 지난주 방문자수/ 날짜 : " + count);
+	    }
+		
 		
 		//대쉬보드 3. 오늘 새 회원 수
 		Long todayNewMem = memService.todayNewMem();

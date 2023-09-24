@@ -15,7 +15,7 @@ import kr.co.laura.security.domain.Visit;
 public interface VisitRepository extends JpaRepository<Visit, Date>{
 	
 	// 오늘 방문자 수
-	Long countByVisitDate(Date today);
+	//Long countByVisitDate(Date today);
 	
 	//저번주 방문자 수(주간) => query dsl
     

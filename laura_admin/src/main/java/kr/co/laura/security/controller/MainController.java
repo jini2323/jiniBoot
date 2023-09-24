@@ -64,12 +64,13 @@ public class MainController {
 		
 		
 		//대쉬보드 5 지난수 새 회원 수 
-		List<Long> lastWeekNewMem = memService.lastWeekNewMem();
+		List<MemCountDTO> lastWeekNewMem = memService.lastWeekNewMem();
 		model.addAttribute("lastWeekNewMem",lastWeekNewMem);
 		
-		for (Object e : lastWeekNewMem) {
-			System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
-		    System.out.println("일주일 전 새 회원수 for each 문 e : "+e);
+		System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
+		for (MemCountDTO e : lastWeekNewMem) {
+		    System.out.println("컨트롤러/지난주/ 새 회원수 : "+e.getCountNewMems());
+		    System.out.println("/컨트롤러/지난주/ 새 회원 가입mdate : "+e.getMdate());
 		}
 		
 		

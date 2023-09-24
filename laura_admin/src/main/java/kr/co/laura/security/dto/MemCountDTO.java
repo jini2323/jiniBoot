@@ -10,13 +10,20 @@ import lombok.Setter;
 @Setter
 public class MemCountDTO {
 	
-	private Long count_mdate; 
-	private Date mdate;
+	private Long countNewMems; 
+	//private Date mdate;
+	private String mdate;
 	
 	
-	public MemCountDTO(Long count_mdate,Date mdate) {
-		this.count_mdate = count_mdate;
+	
+	
+	public MemCountDTO(Long countNewMems,String mdate) {
+		this.countNewMems = countNewMems;
 		this.mdate = mdate;
+		//this.mdate = mdate;
+		System.out.println
+		("Memcount dto 생성자:"+"가입수:"+countNewMems+  
+				"mdate : "+mdate);
 		
 	}
 	

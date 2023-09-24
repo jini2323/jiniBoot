@@ -53,9 +53,8 @@ public class MemberService {
     }
 	    
 	    
-	//지난 주  새 회원 수 차트
-  //지난 주  새 회원 수 차트
-    public List<Long> lastWeekNewMem() {
+    //지난 주  새 회원 수 차트
+    public List<MemCountDTO> lastWeekNewMem() {
         LocalDate today = LocalDate.now();
         int currentDayOfWeek = today.getDayOfWeek().getValue();
         LocalDate previousWeekStart = today.minusDays(currentDayOfWeek).minusWeeks(1).plusDays(1);
@@ -63,8 +62,8 @@ public class MemberService {
         Date startDate = java.sql.Date.valueOf(previousWeekStart);
         Date endDate = java.sql.Date.valueOf(previousWeekEnd);
         
-        return qmemRepositoryImpl.getLastWeekNewMem6(startDate, endDate);
-        
+       // return qmemRepositoryImpl.getLastWeekNewMem6(startDate, endDate);
+        return qmemRepositoryImpl.getLastWeekNewMem1();
     }
 	
     

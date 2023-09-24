@@ -67,7 +67,8 @@ public class QVisitRepositoryImpl implements QVisitRepositoryCustom {
 			Date currentDate = calendar.getTime();
 			Long visitorCount = 0L; // 초기값 0으로 설정
 
-			List<Long> visitCounts = jpaQueryFactory.select(qvisit.countNum.sum()).from(qvisit)
+			List<Long> visitCounts = jpaQueryFactory.
+					select(qvisit.countNum.sum()).from(qvisit)
 					.where(qvisit.visitDate.eq(currentDate)).fetch();
 
 			if (!visitCounts.isEmpty()) {

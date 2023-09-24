@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 import kr.co.laura.security.dto.FundingDTO;
+import kr.co.laura.security.dto.MemCountDTO;
 import kr.co.laura.security.dto.MemDTO;
 import kr.co.laura.security.dto.VisitDTO;
 import kr.co.laura.security.service.FundingService;
@@ -48,15 +49,14 @@ public class MainController {
 		model.addAttribute("lastWeekDatesAndCount", lastWeekDatesAndCount);
 		
 		for (VisitDTO count : lastWeekDatesAndCount) {
-	        System.out.println("메인컨트롤러/ 지난주 방문자수/ 날짜 : " + count);
+	        System.out.println("컨트롤러/ 지난주 방문자수/ 날짜 : " + count.getVisitorCount());
 	    }
 		
 		
 		//대쉬보드 3. 오늘 새 회원 수
 		Long todayNewMem = memService.todayNewMem();
 		model.addAttribute("todayNewMem",todayNewMem);
-		System.out.println("메인컨트롤러 오늘 새 회원수 :"+todayNewMem);
-		
+		System.out.println("컨트롤러 오늘 새 회원수 :"+todayNewMem);
 		
 		//대쉬보드 4. 총 회원수
 		Long totalMem = memService.totalMem();
@@ -66,9 +66,10 @@ public class MainController {
 		//대쉬보드 5 지난수 새 회원 수 
 		List<Long> lastWeekNewMem = memService.lastWeekNewMem();
 		model.addAttribute("lastWeekNewMem",lastWeekNewMem);
-		System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
+		
 		for (Object e : lastWeekNewMem) {
-		    System.out.println("일주일 전 새 회원수 : "+e);
+			System.out.println("일주일 전 새 회원수 lastWeekNewMem문 크기 "+lastWeekNewMem.size());
+		    System.out.println("일주일 전 새 회원수 for each 문 e : "+e);
 		}
 		
 		

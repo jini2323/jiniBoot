@@ -22,6 +22,7 @@ public class QVisitRepositoryImpl implements QVisitRepositoryCustom {
 	
 
 	//대쉬보드 1. 오늘의 방문자 수 
+	@Override
 	public VisitDTO countByVisitDate() {
 		QVisit qvisit = QVisit.visit;
 		VisitDTO result = new VisitDTO();
@@ -47,6 +48,7 @@ public class QVisitRepositoryImpl implements QVisitRepositoryCustom {
 	}
 
 	// 대쉬보드 2.분홍차트 7일전-어제까지의 날까 +방문자 수 2개 같이 구하기 (세션 아니고)
+	@Override
 	public List<VisitDTO> showLastWeekCountVisitWithDate() {
 		QVisit qvisit = QVisit.visit;
 

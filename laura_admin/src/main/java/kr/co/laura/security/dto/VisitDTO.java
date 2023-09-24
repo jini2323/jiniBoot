@@ -14,8 +14,8 @@ public class VisitDTO {
 	private Date visitDate;
     private Long visitorCount;
     
-    public VisitDTO(Date visitDate,Long visitorCount) {
-    	this.visitDate = visitDate;
+    public VisitDTO(String dateString,Long visitorCount) {
+    	this.visitDate = dateString;
     	this.visitorCount = visitorCount;
     	
     }

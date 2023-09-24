@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.laura.security.domain.Mem;
+import kr.co.laura.security.dto.MemCountDTO;
 import kr.co.laura.security.dto.MemDTO;
 import kr.co.laura.security.repository.MemberRepository;
 import kr.co.laura.security.repositoryQMem.QMemRepository;
+import kr.co.laura.security.repositoryQMem.QMemRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class MemberService {
 	private final MemberRepository memRepository;
 	
 	@Autowired
-	private final QMemRepository qmemRepository;
+	private final QMemRepositoryImpl qmemRepositoryImpl;
 	
 
 	// 멤버리스트
@@ -52,17 +54,17 @@ public class MemberService {
 	    
 	    
 	//지난 주  새 회원 수 차트
+  //지난 주  새 회원 수 차트
     public List<Long> lastWeekNewMem() {
-      // LocalDate today = LocalDate.now();
-      //  int currentDayOfWeek = today.getDayOfWeek().getValue();
-       // LocalDate previousWeekStart = today.minusDays(currentDayOfWeek).minusWeeks(1).plusDays(1);
-      //  LocalDate previousWeekEnd = today.minusDays(currentDayOfWeek);
-    	//Date startDate = java.sql.Date.valueOf(previousWeekStart);
-      //  Date endDate = java.sql.Date.valueOf(previousWeekEnd);
-        Date startDate = calculateStartDateForLast7Days();
-        Date endDate = calculateEndDateForYesterday();
+        LocalDate today = LocalDate.now();
+        int currentDayOfWeek = today.getDayOfWeek().getValue();
+        LocalDate previousWeekStart = today.minusDays(currentDayOfWeek).minusWeeks(1).plusDays(1);
+        LocalDate previousWeekEnd = today.minusDays(currentDayOfWeek);
+        Date startDate = java.sql.Date.valueOf(previousWeekStart);
+        Date endDate = java.sql.Date.valueOf(previousWeekEnd);
         
-        return qmemRepository.getLastWeekNewMem(startDate, endDate);
+        return qmemRepositoryImpl.getLastWeekNewMem6(startDate, endDate);
+        
     }
 	
     
@@ -74,7 +76,7 @@ public class MemberService {
 	
 	//인증된 새 회원수 6명 리스트
 	public List<MemDTO> getNewConfirmedMems(){
-		List<MemDTO> newConfirmedMems = qmemRepository.getNewConfirmed();
+		List<MemDTO> newConfirmedMems = qmemRepositoryImpl.getNewConfirmed();
 		return newConfirmedMems;
 	}
 	

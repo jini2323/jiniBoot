@@ -10,10 +10,7 @@ import lombok.Setter;
 public class MemCountDTO {
 	
 	private Long countNewMems; 
-	//private Date mdate;
 	private String mdate;
-	
-	
 	
 	
 	public MemCountDTO(Long countNewMems,String mdate) {
@@ -25,7 +22,6 @@ public class MemCountDTO {
 		//		+" 가입수:"+countNewMems);
 		
 	}
-	
 	
 
 }

@@ -1,8 +1,5 @@
 package kr.co.laura.security.service;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,6 @@ import kr.co.laura.security.domain.Mem;
 import kr.co.laura.security.dto.MemCountDTO;
 import kr.co.laura.security.dto.MemDTO;
 import kr.co.laura.security.repository.MemberRepository;
-import kr.co.laura.security.repositoryQMem.QMemRepository;
 import kr.co.laura.security.repositoryQMem.QMemRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 
@@ -51,7 +47,8 @@ public class MemberService {
 		return totalMem;
 	}
 	
-	//인증된 새 회원수 6명 리스트
+	
+	//인증된 최신순 새 회원수 6명 리스트
 	public List<MemDTO> getNewConfirmedMems(){
 		List<MemDTO> newConfirmedMems = qmemRepositoryImpl.getNewConfirmed();
 		return newConfirmedMems;

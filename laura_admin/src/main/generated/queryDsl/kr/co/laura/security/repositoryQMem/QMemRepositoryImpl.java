@@ -37,26 +37,12 @@ public class QMemRepositoryImpl implements QMemRepositoryCustom {
 	 @PersistenceContext
 	 private EntityManager em;
 
-	 private final QMem qmem = QMem.mem;
-
-	// 시간 정보를 00:00:00으로 설정하는 메서드
-	private Date setTimeToMidnight(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		return calendar.getTime();
-	}
-
 
 	//지난주 새 회원수 데이터 뽑기에 필요 
 	private String formatDate(Date date) {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    return dateFormat.format(date);
 	}
-	
 	
 	
 	//지난주 새 회원수 7일전 -  어제 까지 
@@ -105,13 +91,21 @@ public class QMemRepositoryImpl implements QMemRepositoryCustom {
 		QMem qmem = QMem.mem;
 
 		List<MemDTO> confirmedMems = jpaQueryFactory
-				.select(Projections.constructor(MemDTO.class, qmem.num, qmem.email, qmem.name, qmem.nickname, qmem.tel,
-						qmem.memgender, qmem.birthday, qmem.profilepic, qmem.mdate, qmem.grade, qmem.arstatus,
-						qmem.addr, qmem.bankaccount, qmem.arprofilepic, qmem.arprofile, qmem.ardate, qmem.point))
-				.from(qmem).where(qmem.arstatus.eq("인증")).orderBy(qmem.ardate.desc()).limit(6).fetch();
+				.select(Projections.constructor(MemDTO.class, 
+						qmem.num, qmem.email, qmem.name, qmem.nickname, 
+						qmem.tel,
+						qmem.memgender, qmem.birthday, 
+						qmem.profilepic, qmem.mdate, 
+						qmem.grade, qmem.arstatus,
+						qmem.addr, qmem.bankaccount, qmem.arprofilepic,
+						qmem.arprofile, qmem.ardate, qmem.point))
+				.from(qmem).where(qmem.arstatus.eq("인증"))
+				.orderBy(qmem.ardate.desc()).limit(8).fetch();
 
 		return confirmedMems;
 	}
+	
+	
 	
 	/*
 	//지난 주 새회원수 구하기 옛날 코드 

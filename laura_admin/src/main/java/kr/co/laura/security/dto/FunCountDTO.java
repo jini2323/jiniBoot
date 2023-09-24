@@ -16,9 +16,9 @@ public class FunCountDTO {
 	public FunCountDTO(Long countNewOpenFunding, String sdate) {
 		this.countNewOpenFunding = countNewOpenFunding;
 		this.sdate = sdate;
-		System.out.println
-		("FunCountDOT 생성자: sdate : "+sdate
-				+" 오픈 펀딩 수:"+countNewOpenFunding);
+	//	System.out.println
+	//	("FunCountDOT 생성자: sdate : "+sdate
+	//			+" 오픈 펀딩 수:"+countNewOpenFunding);
 	}
 
 	

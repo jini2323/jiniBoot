@@ -5,10 +5,13 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import groovy.transform.builder.Builder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +22,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @Table(name = "adminloginlog")
 @Entity
@@ -45,24 +48,23 @@ public class AdminLoginLog {
 	@Column(name = "adstatus", nullable = false)
 	private String adstatus;
 
-	@CreationTimestamp // insert시 현재시간,날짜를 저장
+	@CreatedDate
 	@Column(name = "adlogtime", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date adlogtime;
+	private LocalDate adlogtime;
 
 	// 날짜 부분을 오늘 날짜로 설정
-	@Transient // 데이터베이스 컬럼으로 매핑하지 않음
-	private Date today = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+	//@Transient // 데이터베이스 컬럼으로 매핑하지 않음
+	//private Date today = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
 	@Builder
 	public AdminLoginLog (String adid, String adreip, String aduagent, 
-			String adstatus, Date today) {
+			String adstatus,LocalDate adlogtime) {  // Date today
 		
 		this.adid = adid;
 		this.adreip = adreip;
 		this.aduagent = aduagent;
 		this.adstatus = adstatus;
-		this.adlogtime = today;
+		this.adlogtime = adlogtime;
 		
 		System.out.println("builder로 AdminLoginLog 생성!");
 		System.out.println("adreip:"+adreip);

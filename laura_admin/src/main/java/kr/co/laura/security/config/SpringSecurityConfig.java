@@ -1,16 +1,24 @@
 package kr.co.laura.security.config;
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import jakarta.servlet.DispatcherType;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.co.laura.security.handler.CustomLoginSuccessHandler;
+import kr.co.laura.security.service.AdUserDetailsService;
 import lombok.RequiredArgsConstructor;
 
 
@@ -53,9 +61,9 @@ public class SpringSecurityConfig {
         .formLogin(login -> login	// form 방식 로그인 사용
         		.loginPage("/adLoginForm")
         		.loginProcessingUrl("/adLoginProcess")
-        		.successHandler(new CustomLoginSuccessHandler())     //로그인 성공시, 기록 남기기 안에 서비스
         		.usernameParameter("adEmail")
         		.passwordParameter("adPwd")
+        		.failureUrl("/adminError")
                 .defaultSuccessUrl("/dashboard", true)	// 로그인성공 -> 운영진 메인으로
                 .permitAll()	// 대시보드 이동이 막히면 안되므로 얘는 허용
         )

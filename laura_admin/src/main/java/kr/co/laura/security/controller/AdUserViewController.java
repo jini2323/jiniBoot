@@ -70,7 +70,7 @@ public class AdUserViewController {
 		// 로그인 에러 페이지 
 		@GetMapping("/adminError")
 		public String errorAdmin(Model model) {
-			model.addAttribute("msg", "당신은 접근 권한이 없습니다.");
+			model.addAttribute("msg", "접근 권한이 없습니다.");
 			return "admin/aderror";
 		}
 	

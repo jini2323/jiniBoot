@@ -12,19 +12,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import kr.co.laura.security.domain.Aduser;
+import kr.co.laura.security.repository.AdminLoggingRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
 @Service
 public class AdUserDetailsService implements UserDetailsService {
+	
+	@Autowired
+	private final AdminLoggingRepository adminLoggingRepository;
 
 	@Autowired
 	private final AdUserService adUserservice;
 	
 	
-	
-	
+
 	
 	//비번이 동일한지 체크는 스프링부트에서 알아서 진행 : 아이디(메일)만 가지고 DB에서 유저 정보를 가져온다.(기본정보만 필요)
 	@Override

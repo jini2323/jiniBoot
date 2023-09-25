@@ -21,6 +21,9 @@ public class QVisitRepositoryImpl implements QVisitRepositoryCustom {
 	private final JPAQueryFactory jpaQueryFactory;
 	
 
+	//방문자수 누적수
+	
+	
 	//대쉬보드 1. 오늘의 방문자 수 
 	@Override
 	public VisitDTO countByVisitDate() {

@@ -18,5 +18,9 @@ public interface VisitRepository extends JpaRepository<Visit, Date>{
 	//Long countByVisitDate(Date today);
 	
 	//저번주 방문자 수(주간) => query dsl
-    
+	
+	
+	//누적 방문자 수
+	@Query(value = "SELECT SUM(v.countnum) FROM Visit v", nativeQuery = true)
+	Long countByVisitDate();
 }

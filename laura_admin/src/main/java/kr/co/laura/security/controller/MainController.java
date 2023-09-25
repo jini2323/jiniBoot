@@ -43,6 +43,10 @@ public class MainController {
 		model.addAttribute("todayCount", todayCount);
 		//System.out.println("컨트롤러/오늘의 방문자 수: "+todayCount);
 		
+		//대쉬보드 1-2 방문자 수 총 누적 ! 
+		Long totalVisitCount = visitService.totalVisitCount();
+		model.addAttribute("totalVisitCount", totalVisitCount);
+		
 		
 		//대쉬보드 2.분홍차트 7일전-어제까지의 날까 +방문자 수 2개 같이 구하기 (세션 아니고)
 		List<VisitDTO> lastWeekDatesAndCount = visitService.showLastWeekCountVisitWithDate();

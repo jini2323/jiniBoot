@@ -24,6 +24,13 @@ public class VisitService {
 		return qvisitRepository.countByVisitDate();
 	} 
 	
+	//대쉬보드 1-2 누적 방문자 수
+	public Long totalVisitCount() {
+		return visitRepository.countByVisitDate();
+	}
+	
+	
+	
 	//대쉬보드 2.분홍차트 7일전-어제까지의 날까 +방문자 수 2개 같이 구하기 (세션 아니고)
 	public List<VisitDTO> showLastWeekCountVisitWithDate() {
         return qvisitRepository.showLastWeekCountVisitWithDate();

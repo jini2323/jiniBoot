@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import jakarta.servlet.DispatcherType;
+import kr.co.laura.security.handler.CustomLoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 
 
@@ -21,7 +22,8 @@ public class SpringSecurityConfig {
 	//@Secured("ROLE_ADMIN") 해당 권한 가진사람만 메서드에 접근 가능 
 	//메서드 호출 후에 검사 @PostAuthorize("returnObject.owner == authentication.name")
 	//(prePostEnabled = true)/메소드 전에 검사 @EnableWebSecurity => 메서드에 접근권한 설정하여 보안 업 
-	//private static final String[] permitted_list = { "/static/**", "/h2-console/**", "/adLogin", "/adJoin", "/test" };
+	//new AntPathRequestMatcher("/h2-console/**"), //h2 디비 사용시 
+	
 	
 	//암호화 초기과정
 	@Bean
@@ -30,7 +32,7 @@ public class SpringSecurityConfig {
 	}
 	
 	
-	//new AntPathRequestMatcher("/h2-console/**"),
+	
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -51,6 +53,7 @@ public class SpringSecurityConfig {
         .formLogin(login -> login	// form 방식 로그인 사용
         		.loginPage("/adLoginForm")
         		.loginProcessingUrl("/adLoginProcess")
+        		.successHandler(new CustomLoginSuccessHandler())     //로그인 성공시, 기록 남기기 안에 서비스
         		.usernameParameter("adEmail")
         		.passwordParameter("adPwd")
                 .defaultSuccessUrl("/dashboard", true)	// 로그인성공 -> 운영진 메인으로

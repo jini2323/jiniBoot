@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.co.laura.security.domain.Mem;
+import kr.co.laura.security.domain.MemLoginLog;
 import kr.co.laura.security.service.MemberService;
 import lombok.RequiredArgsConstructor;
 
@@ -28,14 +29,17 @@ public class MemController {
 		List<Mem> memList = memService.showMemList();
 		model.addAttribute("memList",memList);
 		
-		
-		
-		
-		
 		return "member/memList";
 	}
 	
-	
+	//회원 로그인 기록 
+	@GetMapping("/memLoginLog")
+	public String memberLoginLogTable(Model model,Pageable pageable) {
+		List<MemLoginLog> memLoginLogs = memService.showMemLoginLog();
+		model.addAttribute("memLoginLogs",memLoginLogs);
+		
+		return "member/memLoginLog";
+	}
 	
 	
 	

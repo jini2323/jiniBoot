@@ -22,6 +22,11 @@ public class AdUserService {
     	return adUserRepository.findByAdEmail(adEmail);
     }
     
+    //로그인 성공시 기록 남기는 메서드
+    
+    
+    
+    
     
     /*로그인 관련 메서드 */
     public boolean isValidMember(String adEmail, String adPwd) {

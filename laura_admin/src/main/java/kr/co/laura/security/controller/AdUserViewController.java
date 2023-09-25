@@ -20,10 +20,9 @@ public class AdUserViewController {
 	}
 	
 	
-	//임시
-	//@GetMapping("/dashboard")
-	public String dashboard(Model model) {
-		return "admin2/dashboard";
+	//@GetMapping("/memLoginLog")
+	public String memLoginLogPage(Model model) {
+		return "member/memLoginLog";
 	}
 	
 	
@@ -40,8 +39,6 @@ public class AdUserViewController {
 	
 	
 	/////임시영역
-
-	
 	@RequestMapping(value = { "/", "/adMain" }, method = RequestMethod.GET)
 	public String adminIndex(Model model) {
 		model.addAttribute("msg","여기는 관리자 임시 페이지 입니다.");

@@ -1,13 +1,16 @@
 package kr.co.laura.security.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.laura.security.domain.Mem;
+import kr.co.laura.security.domain.MemLoginLog;
 import kr.co.laura.security.dto.MemCountDTO;
 import kr.co.laura.security.dto.MemDTO;
+import kr.co.laura.security.repository.MemLoggingRepository;
 import kr.co.laura.security.repository.MemberRepository;
 import kr.co.laura.security.repositoryQMem.QMemRepositoryImpl;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,9 @@ public class MemberService {
 	
 	@Autowired
 	private final QMemRepositoryImpl qmemRepositoryImpl;
+	
+	@Autowired
+	private final MemLoggingRepository memLoggingRepository;
 	
 
 	// 멤버리스트
@@ -54,6 +60,12 @@ public class MemberService {
 		return newConfirmedMems;
 	}
 	
+	
+	//최신순으로 로그인 기록 불러오기 
+	public List<MemLoginLog> showMemLoginLog(){
+		List<MemLoginLog> memLoginLogs = memLoggingRepository.findAll();
+		return memLoginLogs;
+	}
 	
 	
 

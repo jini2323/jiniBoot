@@ -24,6 +24,8 @@ public class AdUserDetailsService implements UserDetailsService {
 	
 	
 	
+	
+	
 	//비번이 동일한지 체크는 스프링부트에서 알아서 진행 : 아이디(메일)만 가지고 DB에서 유저 정보를 가져온다.(기본정보만 필요)
 	@Override
 	public UserDetails loadUserByUsername(String adEmail) throws UsernameNotFoundException {

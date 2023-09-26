@@ -3,7 +3,12 @@ package kr.co.laura.security.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import kr.co.laura.security.domain.Mem;
 import kr.co.laura.security.domain.MemLoginLog;
@@ -30,8 +35,15 @@ public class MemberService {
 
 	// 멤버리스트
 	public List<Mem> showMemList() {
-		return memRepository.findAll();
+		return memRepository.findAllByOrderByMdateDesc();
 	}
+	
+	//public Page<Mem> findMembers(int page, int size) {
+	//    return memRepository.findAll(PageRequest.of(page, size, Sort.by("mdate").descending()));
+	//}
+	
+	
+	
 
 	//오늘 가입한 회원 수 
 	public Long todayNewMem() {

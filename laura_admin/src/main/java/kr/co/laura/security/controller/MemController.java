@@ -24,13 +24,20 @@ public class MemController {
 	
 	
 	//회원 리스트 
+	/*
+	 * @GetMapping("/memList") public String memberTalbe(Model model,Pageable
+	 * pageable) { List<Mem> memList = memService.showMemList();
+	 * model.addAttribute("memList",memList); return "member/memList"; }
+	 */
+	
+	//회원 리스트 페이징처리
 	@GetMapping("/memList")
 	public String memberTalbe(Model model,Pageable pageable) {
 		List<Mem> memList = memService.showMemList();
 		model.addAttribute("memList",memList);
-		
 		return "member/memList";
 	}
+	
 	
 	//회원 로그인 기록 
 	@GetMapping("/memLoginLog")

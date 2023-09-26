@@ -5,6 +5,9 @@ import java.util.Date;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -149,11 +152,6 @@ public class Mem {
  // System.out.println("생성된 회원의 권한:"+roleType); 
   
  }
-	
-	
-	
-	
-	
 	
 	
 }

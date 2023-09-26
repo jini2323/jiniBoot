@@ -20,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class AdUserDetailsService implements UserDetailsService {
 	
-	@Autowired
-	private final AdminLoggingRepository adminLoggingRepository;
+	//@Autowired
+	//private final AdminLoggingRepository adminLoggingRepository;
 
 	@Autowired
 	private final AdUserService adUserservice;

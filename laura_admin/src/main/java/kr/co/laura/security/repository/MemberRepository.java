@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface MemberRepository extends PagingAndSortingRepository <Mem, Long>{
+public interface MemberRepository extends JpaRepository<Mem, Long>{
 //public interface MemberRepository extends JpaRepository<Mem, Long> {
 
 	

@@ -274,8 +274,9 @@
 									            </div>
 									        </div>
 									        <div class="progress">
-									            <div class="progress-bar bg-gradient-info" role="progressbar"
-									                th:style="'width: ' + (${achievementRates[status.index]} > 100 ? '100%' : achievementRates[status.index] + '%')"></div>
+									          <div class="progress-bar bg-gradient-info" role="progressbar" 
+     th:style="'width: ' + (${achievementRates[status.index]} > 100 ? '100%' : ${achievementRates[status.index]} + '%')">
+     </div>
 									        </div>
 									    </div>
 									</td>
